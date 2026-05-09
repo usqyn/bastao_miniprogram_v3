@@ -1,0 +1,273 @@
+/* 商品管理页面 */
+.admin-page {
+  min-height: 100vh;
+  background: #F5F5F5;
+  padding-bottom: 40rpx;
+}
+
+/* 顶部操作栏 */
+.admin-header {
+  background: #003D7A;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #fff;
+}
+
+.add-btn {
+  background: #C41E3A;
+  color: #fff;
+  padding: 16rpx 30rpx;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+}
+
+/* 搜索栏 */
+.search-bar {
+  display: flex;
+  padding: 20rpx;
+  background: #fff;
+  gap: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 70rpx;
+  background: #F5F5F5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+}
+
+.search-btn {
+  background: #003D7A;
+  color: #fff;
+  padding: 0 40rpx;
+  height: 70rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+/* 商品列表 */
+.product-list {
+  padding: 20rpx;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.product-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+
+.product-info {
+  flex: 1;
+  padding: 0 20rpx;
+}
+
+.product-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-price {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #C41E3A;
+  margin-bottom: 6rpx;
+}
+
+.product-category {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.action-btn {
+  padding: 10rpx 24rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  text-align: center;
+}
+
+.action-btn.edit {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+.action-btn.delete {
+  background: #FFEBEE;
+  color: #C41E3A;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 0;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 弹窗 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: none;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 600rpx;
+  max-height: 80%;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 32rpx;
+  color: #999;
+  padding: 10rpx;
+}
+
+.modal-body {
+  flex: 1;
+  padding: 30rpx;
+  max-height: 600rpx;
+}
+
+.form-item {
+  margin-bottom: 24rpx;
+}
+
+.form-label {
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  background: #F5F5F5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.form-picker {
+  width: 100%;
+  height: 80rpx;
+  background: #F5F5F5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.modal-footer {
+  display: flex;
+  padding: 20rpx 30rpx 40rpx;
+  gap: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.btn-cancel, .btn-confirm {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+
+.btn-cancel {
+  background: #F5F5F5;
+  color: #666;
+}
+
+.btn-confirm {
+  background: #C41E3A;
+  color: #fff;
+}

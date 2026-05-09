@@ -6,7 +6,15 @@
     "pages/result/result",
     "pages/services/services",
     "pages/consult/consult",
-    "pages/webview/webview"
+    "pages/webview/webview",
+    "pages/cart/cart",
+    "pages/order-confirm/order-confirm",
+    "pages/orders/orders",
+    "pages/pay-result/pay-result",
+    "pages/admin/admin",
+    "pages/admin-stats/admin-stats",
+    "pages/admin-products/admin-products",
+    "pages/admin-orders/admin-orders"
   ],
   "window": {
     "navigationBarTitleText": "巴丝淘",
@@ -22,7 +30,7 @@
     "list": [
       { "pagePath": "pages/index/index", "text": "首页" },
       { "pagePath": "pages/query/query", "text": "商标查询" },
-      { "pagePath": "pages/services/services", "text": "服务" },
+      { "pagePath": "pages/services/services", "text": "商城" },
       { "pagePath": "pages/consult/consult", "text": "获取方案" }
     ]
   },

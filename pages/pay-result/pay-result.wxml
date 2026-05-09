@@ -1,0 +1,36 @@
+<!-- 支付结果页面 -->
+<view class="pay-result-page">
+
+  <!-- 支付成功 -->
+  <view class="result-section" wx:if="{{status === 'success'}}">
+    <view class="result-icon success">✓</view>
+    <view class="result-title">{{t.paySuccess}}</view>
+    <view class="result-amount">
+      <text class="amount-label">{{t.payAmount}}</text>
+      <text class="amount-symbol">¥</text>
+      <text class="amount-num">{{amount}}</text>
+    </view>
+    <view class="result-order">{{t.orderNo}}: {{orderNo}}</view>
+  </view>
+
+  <!-- 支付失败 -->
+  <view class="result-section" wx:if="{{status === 'fail'}}">
+    <view class="result-icon fail">✕</view>
+    <view class="result-title">{{t.payFail}}</view>
+    <view class="result-desc">{{t.payFailDesc}}</view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <view class="btn-primary" bindtap="viewOrder">{{t.viewOrder}}</view>
+    <view class="btn-secondary" bindtap="continueShop">{{t.continueShop}}</view>
+  </view>
+
+  <!-- 服务提示 -->
+  <view class="service-tips">
+    <view class="tips-title">{{t.serviceTips}}</view>
+    <view class="tips-item">📞 {{t.servicePhone}}</view>
+    <view class="tips-item">💬 {{t.serviceWechat}}</view>
+  </view>
+
+</view>

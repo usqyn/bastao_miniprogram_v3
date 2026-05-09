@@ -1,0 +1,100 @@
+<!-- 管理后台 - 数据统计页面 -->
+<view class="admin-page">
+  <!-- 顶部导航 -->
+  <view class="admin-header">
+    <view class="header-left">
+      <view class="welcome">欢迎回来，管理员</view>
+      <view class="date">{{currentDate}}</view>
+    </view>
+    <view class="header-right">
+      <view class="logout-btn" bindtap="handleLogout">退出</view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-nav">
+    <view class="nav-item" bindtap="goProducts">
+      <view class="nav-icon">📦</view>
+      <view class="nav-text">商品管理</view>
+    </view>
+    <view class="nav-item" bindtap="goOrders">
+      <view class="nav-icon">📋</view>
+      <view class="nav-text">订单管理</view>
+    </view>
+    <view class="nav-item" bindtap="goStats">
+      <view class="nav-icon">📊</view>
+      <view class="nav-text">数据统计</view>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-grid">
+    <view class="stat-card">
+      <view class="stat-icon blue">💰</view>
+      <view class="stat-info">
+        <view class="stat-value">{{stats.totalRevenue}}</view>
+        <view class="stat-label">总收入(元)</view>
+      </view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-icon red">🛒</view>
+      <view class="stat-info">
+        <view class="stat-value">{{stats.totalOrders}}</view>
+        <view class="stat-label">总订单</view>
+      </view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-icon orange">📦</view>
+      <view class="stat-info">
+        <view class="stat-value">{{stats.totalProducts}}</view>
+        <view class="stat-label">商品数</view>
+      </view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-icon green">⏳</view>
+      <view class="stat-info">
+        <view class="stat-value">{{stats.pendingOrders}}</view>
+        <view class="stat-label">待处理</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日概览 -->
+  <view class="section">
+    <view class="section-title">今日概览</view>
+    <view class="today-grid">
+      <view class="today-item">
+        <view class="today-value">{{todayStats.orders}}</view>
+        <view class="today-label">今日订单</view>
+      </view>
+      <view class="today-item">
+        <view class="today-value">{{todayStats.revenue}}</view>
+        <view class="today-label">今日收入</view>
+      </view>
+      <view class="today-item">
+        <view class="today-value">{{todayStats.views}}</view>
+        <view class="today-label">今日访问</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最新订单 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">最新订单</view>
+      <view class="section-more" bindtap="goOrders">查看全部 ›</view>
+    </view>
+    <view class="order-list">
+      <view class="order-item" wx:for="{{recentOrders}}" wx:key="orderNo">
+        <view class="order-info">
+          <view class="order-no">{{item.orderNo}}</view>
+          <view class="order-time">{{item.createTime}}</view>
+        </view>
+        <view class="order-right">
+          <view class="order-amount">¥{{item.totalAmount}}</view>
+          <view class="order-status status-{{item.status}}">{{item.statusText}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

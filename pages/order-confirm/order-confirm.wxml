@@ -1,0 +1,69 @@
+<!-- 订单确认页面 -->
+<view class="order-confirm-page">
+
+  <!-- 收货地址 -->
+  <view class="address-section" bindtap="chooseAddress">
+    <view class="address-icon">📍</view>
+    <view class="address-info" wx:if="{{address}}">
+      <view class="address-name">{{address.name}} {{address.phone}}</view>
+      <view class="address-detail">{{address.province}}{{address.city}}{{address.district}}{{address.detail}}</view>
+    </view>
+    <view class="address-info" wx:else>
+      <view class="address-empty">{{t.addAddress}}</view>
+    </view>
+    <view class="address-arrow">›</view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="goods-section">
+    <view class="section-title">{{t.orderGoods}}</view>
+    <view class="goods-item" wx:for="{{orderItems}}" wx:key="id">
+      <image class="goods-img" src="{{item.image}}" mode="aspectFill" />
+      <view class="goods-info">
+        <view class="goods-name">{{item.name}}</view>
+        <view class="goods-spec" wx:if="{{item.spec}}">{{item.spec}}</view>
+        <view class="goods-price-row">
+          <view class="goods-price">¥{{item.price}}</view>
+          <view class="goods-qty">x{{item.quantity}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单备注 -->
+  <view class="remark-section">
+    <view class="section-title">{{t.orderRemark}}</view>
+    <textarea class="remark-input" placeholder="{{t.remarkPlaceholder}}" bindinput="onRemarkInput" value="{{remark}}" />
+  </view>
+
+  <!-- 价格明细 -->
+  <view class="price-section">
+    <view class="price-row">
+      <text>{{t.goodsTotal}}</text>
+      <text>¥{{goodsTotal}}</text>
+    </view>
+    <view class="price-row">
+      <text>{{t.freight}}</text>
+      <text>{{freight > 0 ? '¥' + freight : t.freeFreight}}</text>
+    </view>
+    <view class="price-row discount" wx:if="{{discount > 0}}">
+      <text>{{t.discount}}</text>
+      <text>-¥{{discount}}</text>
+    </view>
+    <view class="price-row total">
+      <text>{{t.orderTotal}}</text>
+      <text class="total-price">¥{{orderTotal}}</text>
+    </view>
+  </view>
+
+  <!-- 底部提交栏 -->
+  <view class="submit-footer">
+    <view class="footer-price">
+      <text>{{t.orderTotal}}:</text>
+      <text class="price-symbol">¥</text>
+      <text class="price-num">{{orderTotal}}</text>
+    </view>
+    <view class="submit-btn" bindtap="submitOrder">{{t.submitOrder}}</view>
+  </view>
+
+</view>

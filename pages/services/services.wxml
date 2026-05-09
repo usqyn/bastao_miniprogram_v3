@@ -1,16 +1,102 @@
+<!-- 语言切换 -->
 <view class="lang-pills">
   <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
   <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
   <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
 </view>
-<view class="container {{rtl?'rtl':''}}">
-  <view class="card top"><view class="kazakh-line"></view><view class="title">{{t.serviceTopTitle}}</view><view class="muted">{{t.serviceTopSub}}</view></view>
-  <block wx:for="{{t.serviceList}}" wx:key="name">
-    <view class="card service">
-      <view class="row"><view class="icon">{{item.icon}}</view><view><view class="name">{{item.name}}</view><view class="muted">{{item.desc}}</view></view></view>
-      <view class="tags"><text class="tag">{{t.tag1}}</text><text class="tag">{{t.tag2}}</text><text class="tag">{{t.tag3}}</text></view>
-      <button class="btn btn-primary" bindtap="goConsult">{{t.quote}}</button>
+
+<!-- 商城页面 -->
+<view class="mall-page {{rtl?'rtl':''}}">
+
+  <!-- 顶部品牌区 -->
+  <view class="mall-header">
+    <view class="header-row">
+      <view class="header-left">
+        <view class="kazakh-line"></view>
+        <view class="mall-title">{{t.mallTitle}}</view>
+        <view class="mall-subtitle">{{t.mallSubtitle}}</view>
+      </view>
+      <view class="header-right">
+        <!-- 购物车图标 -->
+        <view class="cart-icon-wrap" bindtap="goCart">
+          <text class="cart-icon">🛒</text>
+          <view class="cart-badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+        </view>
+      </view>
     </view>
-  </block>
+  </view>
+
+  <!-- 分类标签栏 -->
+  <scroll-view class="category-bar" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="category-list">
+      <view
+        class="category-item {{activeCategory === index ? 'active' : ''}}"
+        wx:for="{{t.categories}}"
+        wx:key="index"
+        data-index="{{index}}"
+        bindtap="switchCategory"
+      >
+        {{item}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 商品双列瀑布流 -->
+  <view class="product-grid">
+    <block wx:for="{{filteredProducts}}" wx:key="id">
+      <view class="product-card">
+        <!-- 商品图片区 -->
+        <view class="product-img-wrap" bindtap="viewProduct" data-item="{{item}}">
+          <image class="product-img" src="{{item.image}}" mode="aspectFill" />
+          <!-- 角标 -->
+          <view class="product-badge" wx:if="{{item.badge}}">{{item.badge}}</view>
+          <!-- 促销条 -->
+          <view class="product-promo" wx:if="{{item.promo}}">{{item.promo}}</view>
+        </view>
+        <!-- 商品信息区 -->
+        <view class="product-info">
+          <!-- 卖点标题 -->
+          <view class="product-slogan" wx:if="{{item.slogan}}">{{item.slogan}}</view>
+          <!-- 商品名称 -->
+          <view class="product-name">{{item.name}}</view>
+          <!-- 规格 -->
+          <view class="product-spec" wx:if="{{item.spec}}">{{item.spec}}</view>
+          <!-- 标签 -->
+          <view class="product-tags" wx:if="{{item.tags}}">
+            <text class="product-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+          </view>
+          <!-- 价格区 -->
+          <view class="product-price-row">
+            <view class="product-price">
+              <text class="price-symbol">¥</text>
+              <text class="price-num">{{item.price}}</text>
+              <text class="price-original" wx:if="{{item.originalPrice}}">¥{{item.originalPrice}}</text>
+            </view>
+            <!-- 加入购物车按钮 -->
+            <view class="product-cart" catchtap="addToCart" data-item="{{item}}">
+              <text class="cart-icon">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部购物车栏 -->
+  <view class="mall-footer" wx:if="{{cartCount > 0}}">
+    <view class="footer-cart" bindtap="goCart">
+      <view class="footer-cart-icon">
+        <text>🛒</text>
+        <view class="footer-cart-badge">{{cartCount}}</view>
+      </view>
+      <view class="footer-cart-total">
+        <text>{{t.total}}: </text>
+        <text class="total-price">¥{{cartTotal}}</text>
+      </view>
+    </view>
+    <view class="footer-checkout" bindtap="goCheckout">{{t.checkout}}</view>
+  </view>
+
 </view>
+
 <tabbar current="3"></tabbar>

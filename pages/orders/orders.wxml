@@ -1,0 +1,59 @@
+<!-- 订单列表页面 -->
+<view class="orders-page">
+
+  <!-- 语言切换 -->
+  <view class="lang-pills">
+    <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
+    <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
+    <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
+  </view>
+
+  <!-- 订单状态标签 -->
+  <view class="status-tabs">
+    <view class="status-tab {{activeStatus === 'all' ? 'active' : ''}}" data-status="all" bindtap="switchStatus">{{t.allOrders}}</view>
+    <view class="status-tab {{activeStatus === 'pending' ? 'active' : ''}}" data-status="pending" bindtap="switchStatus">{{t.pendingPay}}</view>
+    <view class="status-tab {{activeStatus === 'paid' ? 'active' : ''}}" data-status="paid" bindtap="switchStatus">{{t.pendingShip}}</view>
+    <view class="status-tab {{activeStatus === 'completed' ? 'active' : ''}}" data-status="completed" bindtap="switchStatus">{{t.completed}}</view>
+  </view>
+
+  <!-- 空订单 -->
+  <view class="empty-orders" wx:if="{{filteredOrders.length === 0}}">
+    <view class="empty-icon">📋</view>
+    <view class="empty-text">{{t.noOrders}}</view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <view class="order-card" wx:for="{{filteredOrders}}" wx:key="orderNo">
+      <view class="order-header">
+        <view class="order-no">{{t.orderNo}}: {{item.orderNo}}</view>
+        <view class="order-status status-{{item.status}}">{{item.statusText}}</view>
+      </view>
+      
+      <view class="order-goods">
+        <view class="goods-item" wx:for="{{item.items}}" wx:for-item="goods" wx:key="id">
+          <image class="goods-img" src="{{goods.image}}" mode="aspectFill" />
+          <view class="goods-info">
+            <view class="goods-name">{{goods.name}}</view>
+            <view class="goods-price-row">
+              <view class="goods-price">¥{{goods.price}}</view>
+              <view class="goods-qty">x{{goods.quantity}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-footer">
+        <view class="order-total">
+          {{t.totalCount}}: {{item.totalCount}} {{t.itemsUnit}}
+          <text class="total-amount">{{t.orderTotal}}: ¥{{item.totalAmount}}</text>
+        </view>
+        <view class="order-actions">
+          <view class="action-btn" wx:if="{{item.status === 'pending'}}" bindtap="payOrder" data-order="{{item}}">{{t.payNow}}</view>
+          <view class="action-btn secondary" bindtap="viewDetail" data-order="{{item}}">{{t.viewDetail}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

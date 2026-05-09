@@ -1,0 +1,74 @@
+<!-- 管理后台 - 订单管理页面 -->
+<view class="admin-page">
+  <!-- 顶部操作栏 -->
+  <view class="admin-header">
+    <view class="header-title">订单管理</view>
+    <view class="header-action">
+      <view class="refresh-btn" bindtap="refreshOrders">刷新</view>
+    </view>
+  </view>
+
+  <!-- 订单状态筛选 -->
+  <view class="filter-tabs">
+    <view class="filter-tab {{activeStatus === 'all' ? 'active' : ''}}" data-status="all" bindtap="switchStatus">全部</view>
+    <view class="filter-tab {{activeStatus === 'pending' ? 'active' : ''}}" data-status="pending" bindtap="switchStatus">待付款</view>
+    <view class="filter-tab {{activeStatus === 'paid' ? 'active' : ''}}" data-status="paid" bindtap="switchStatus">已付款</view>
+    <view class="filter-tab {{activeStatus === 'shipped' ? 'active' : ''}}" data-status="shipped" bindtap="switchStatus">已发货</view>
+    <view class="filter-tab {{activeStatus === 'completed' ? 'active' : ''}}" data-status="completed" bindtap="switchStatus">已完成</view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <view class="order-card" wx:for="{{orders}}" wx:key="orderNo">
+      <view class="order-header">
+        <view class="order-no">订单号: {{item.orderNo}}</view>
+        <view class="order-status status-{{item.status}}">{{item.statusText}}</view>
+      </view>
+      
+      <view class="order-info">
+        <view class="info-row">
+          <text class="info-label">下单时间:</text>
+          <text class="info-value">{{item.createTime}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">收货人:</text>
+          <text class="info-value">{{item.address.name}} {{item.address.phone}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">地址:</text>
+          <text class="info-value">{{item.address.province}}{{item.address.city}}{{item.address.district}}{{item.address.detail}}</text>
+        </view>
+      </view>
+
+      <view class="order-goods">
+        <view class="goods-item" wx:for="{{item.items}}" wx:for-item="goods" wx:key="id">
+          <image class="goods-img" src="{{goods.image}}" mode="aspectFill" />
+          <view class="goods-info">
+            <view class="goods-name">{{goods.name}}</view>
+            <view class="goods-price-row">
+              <text class="goods-price">¥{{goods.price}}</text>
+              <text class="goods-qty">x{{goods.quantity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-footer">
+        <view class="order-total">
+          <text>共{{item.totalCount}}件商品</text>
+          <text class="total-amount">合计: ¥{{item.totalAmount}}</text>
+        </view>
+        <view class="order-actions">
+          <view class="action-btn primary" wx:if="{{item.status === 'paid'}}" bindtap="shipOrder" data-order="{{item}}">发货</view>
+          <view class="action-btn" bindtap="viewDetail" data-order="{{item}}">详情</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{orders.length === 0}}">
+    <view class="empty-icon">📋</view>
+    <view class="empty-text">暂无订单</view>
+  </view>
+</view>

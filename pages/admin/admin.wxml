@@ -1,0 +1,41 @@
+<!-- 管理后台登录页面 -->
+<view class="admin-login-page">
+  <view class="login-container">
+    <view class="login-logo">
+      <view class="logo-icon">🔐</view>
+      <view class="logo-title">巴丝淘管理后台</view>
+      <view class="logo-subtitle">商家管理中心</view>
+    </view>
+
+    <view class="login-form">
+      <view class="form-item">
+        <view class="form-label">用户名</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入管理员账号" 
+          value="{{username}}"
+          bindinput="onUsernameInput"
+        />
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">密码</view>
+        <input 
+          class="form-input" 
+          type="password"
+          placeholder="请输入密码" 
+          value="{{password}}"
+          bindinput="onPasswordInput"
+        />
+      </view>
+
+      <view class="login-btn {{loading ? 'loading' : ''}}" bindtap="handleLogin">
+        {{loading ? '登录中...' : '登录'}}
+      </view>
+
+      <view class="login-tips">
+        <text>默认账号: admin / 密码: 123456</text>
+      </view>
+    </view>
+  </view>
+</view>

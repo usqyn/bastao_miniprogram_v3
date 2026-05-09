@@ -1,0 +1,129 @@
+/* 支付结果页面 */
+.pay-result-page {
+  min-height: 100vh;
+  background: #F5F5F5;
+  padding: 60rpx 30rpx;
+}
+
+.result-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 60rpx 30rpx;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.result-icon {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  margin: 0 auto 30rpx;
+}
+
+.result-icon.success {
+  background: #E8F5E9;
+  color: #4CAF50;
+}
+
+.result-icon.fail {
+  background: #FFEBEE;
+  color: #F44336;
+}
+
+.result-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.result-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.amount-label {
+  font-size: 26rpx;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.amount-symbol {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #C41E3A;
+}
+
+.amount-num {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #C41E3A;
+}
+
+.result-order {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.result-desc {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  margin-bottom: 30rpx;
+}
+
+.btn-primary {
+  background: #C41E3A;
+  color: #fff;
+  text-align: center;
+  padding: 28rpx 0;
+  border-radius: 50rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #C41E3A;
+  text-align: center;
+  padding: 28rpx 0;
+  border-radius: 50rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  border: 2rpx solid #C41E3A;
+}
+
+/* 服务提示 */
+.service-tips {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+}
+
+.tips-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.tips-item {
+  font-size: 26rpx;
+  color: #666;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.tips-item:last-child {
+  border-bottom: none;
+}
