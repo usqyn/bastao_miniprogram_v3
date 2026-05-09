@@ -6,23 +6,38 @@ Page({
     lang: 'zh',
     t: {},
     rtl: false,
+    activeCategory: 'all',
+    filteredServices: [],
     // 轮播图数据
     banners: [
       { id: 1, image: '/images/zh/banner1.png', title: '2060+', subtitle: '全国服务门店为你服务' },
       { id: 2, image: '/images/zh/banner2.png', title: '专业团队', subtitle: '一对一专属顾问服务' },
       { id: 3, image: '/images/zh/banner3.png', title: '品质保障', subtitle: '全程跟踪直至完成' }
-    ],
-    // 滚动字幕
-    marqueeText: '恭喜 张先生 成功注册商标  恭喜 李女士 完成公司注册  恭喜 王总 专利申请通过'
+    ]
   },
 
   onLoad() {
     applyLang(this)
-    this.startMarquee()
   },
 
   onShow() {
     applyLang(this)
+    this.filterServices()
+  },
+
+  filterServices() {
+    const services = this.data.t.serviceList || []
+    if (this.data.activeCategory === 'all') {
+      this.setData({ filteredServices: services })
+    } else {
+      this.setData({ filteredServices: services.filter(s => s.category === this.data.activeCategory) })
+    }
+  },
+
+  switchCategory(e) {
+    const category = e.currentTarget.dataset.category
+    this.setData({ activeCategory: category })
+    this.filterServices()
   },
 
   onInput(e) {
@@ -52,8 +67,4 @@ Page({
     })
   },
 
-  // 启动滚动字幕
-  startMarquee() {
-    // 简单的字幕滚动效果，实际项目中可以使用 CSS 动画
-  }
-})
+  })

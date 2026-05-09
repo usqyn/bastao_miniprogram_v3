@@ -213,13 +213,13 @@ module.exports = {
   tag3:'透明报价',
   quote:'咨询报价',
   serviceList:[
-    {icon:'®️',name:'商标注册',desc:'查询、分类、递交、进度跟进、驳回复核建议'},
-    {icon:'🎨',name:'商标设计',desc:'融合哈萨克文化的品牌命名与Logo设计'},
-    {icon:'🌐',name:'网站开发',desc:'多语言官网、企业展示站'},
-    {icon:'📱',name:'小程序开发',desc:'微信小程序、商城、表单获客、后台管理'},
-    {icon:'📄',name:'专利申请',desc:'专利材料整理、流程辅导与申请跟进'},
-    {icon:'💡',name:'专利设计',desc:'产品方案与图纸优化'},
-    {icon:'🎓',name:'课程与软件服务',desc:'商标避坑课程、工具模板、数字化服务'},
-    {icon:'🏢',name:'公司注册',desc:'中国、哈萨克斯坦、香港、美国等公司注册方案'}
+    {icon:'®️',name:'商标注册',desc:'查询、分类、递交、进度跟进、驳回复核建议',category:'trademark'},
+    {icon:'🎨',name:'商标设计',desc:'融合哈萨克文化的品牌命名与Logo设计',category:'trademark'},
+    {icon:'🌐',name:'网站开发',desc:'多语言官网、企业展示站',category:'other'},
+    {icon:'📱',name:'小程序开发',desc:'微信小程序、商城、表单获客、后台管理',category:'other'},
+    {icon:'📄',name:'专利申请',desc:'专利材料整理、流程辅导与申请跟进',category:'patent'},
+    {icon:'💡',name:'专利设计',desc:'产品方案与图纸优化',category:'patent'},
+    {icon:'🎓',name:'课程与软件服务',desc:'商标避坑课程、工具模板、数字化服务',category:'other'},
+    {icon:'🏢',name:'公司注册',desc:'中国、哈萨克斯坦、香港、美国等公司注册方案',category:'company'}
   ]
 }
