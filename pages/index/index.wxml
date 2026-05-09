@@ -1,22 +1,120 @@
+<!-- 语言切换 -->
 <view class="lang-pills">
   <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
   <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
   <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
 </view>
+
 <view class="container {{rtl?'rtl':''}}">
-  <view class="hero">
-    <swiper class="hero-swiper" style="direction:ltr" indicator-dots autoplay circular indicator-active-color="#C9A961">
-      <swiper-item wx:for="{{t.heroBanners}}" wx:key="index">
-        <image src="{{item.image}}" mode="aspectFit" class="banner-img"/>
+  
+  <!-- 顶部轮播区域 -->
+  <view class="banner-section">
+    <!-- 轮播图 -->
+    <swiper class="banner-swiper" indicator-dots autoplay circular indicator-active-color="#fff" indicator-color="rgba(255,255,255,0.5)">
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <view class="banner-item">
+          <image src="{{item.image}}" mode="aspectFill" class="banner-bg"/>
+          <view class="banner-overlay">
+            <view class="banner-brand">BASTAO</view>
+            <view class="banner-title">{{item.title}}</view>
+            <view class="banner-subtitle">{{item.subtitle}}</view>
+            <view class="banner-cities">深圳、广州、东莞、佛山、武汉、长沙、成都、重庆、杭州...</view>
+          </view>
+        </view>
       </swiper-item>
     </swiper>
-    <view class="search-card">
-      <input class="hero-input" placeholder="{{t.placeholder}}" value="{{keyword}}" bindinput="onInput" />
-      <button class="btn btn-gold" bindtap="goQuery">{{t.queryBtn}}</button>
-      <button class="btn ghost" bindtap="goConsult">{{t.consultBtn}}</button>
-      <button class="btn ghost" open-type="contact">{{t.officialAccountBtn}}</button>
+    
+    <!-- 滚动字幕 -->
+    <view class="marquee-bar">
+      <view class="marquee-label">最新</view>
+      <view class="marquee-content">
+        <view class="marquee-text">{{marqueeText}}</view>
+      </view>
     </view>
   </view>
+
+  <!-- 快捷入口卡片 -->
+  <view class="quick-entry-card">
+    <view class="quick-row">
+      <view class="quick-item" bindtap="goServices">
+        <view class="quick-title">商标注册 <text class="arrow">›</text></view>
+        <view class="quick-desc">专业代理</view>
+      </view>
+      <view class="quick-item" bindtap="goServices">
+        <view class="quick-title">公司注册 <text class="arrow">›</text></view>
+        <view class="quick-desc">全球服务</view>
+      </view>
+      <view class="quick-item" bindtap="goServices">
+        <view class="quick-title">专利申请 <text class="arrow">›</text></view>
+        <view class="quick-desc">快速通道</view>
+      </view>
+    </view>
+    
+    <view class="quick-icons">
+      <view class="icon-item" bindtap="goServices">
+        <view class="icon-box gold">👑</view>
+        <view class="icon-text">VIP服务</view>
+      </view>
+      <view class="icon-item" bindtap="goServices">
+        <view class="icon-box">🌐</view>
+        <view class="icon-text">全球注册</view>
+      </view>
+      <view class="icon-item" bindtap="goServices">
+        <view class="icon-box">🛒</view>
+        <view class="icon-text">优悦商城</view>
+      </view>
+      <view class="icon-item" bindtap="goConsult">
+        <view class="icon-box">💬</view>
+        <view class="icon-text">我要咨询</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员信息卡片 -->
+  <view class="vip-card">
+    <view class="vip-header">
+      <view class="vip-name">{{t.clients}} <text class="vip-tag">VIP</text></view>
+    </view>
+    <view class="vip-stats">
+      <view class="stat-item">
+        <view class="stat-num">0</view>
+        <view class="stat-label">余额</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">1287</view>
+        <view class="stat-label">积分</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">0</view>
+        <view class="stat-label">优惠券</view>
+      </view>
+    </view>
+    <view class="vip-privilege">
+      <text class="privilege-title">我的特权</text>
+      <text class="privilege-desc">商标注册/公司注册享8.5折，全国超2000家门店通用</text>
+      <text class="privilege-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 推广横幅 -->
+  <view class="promo-banner" bindtap="goServices">
+    <view class="promo-content">
+      <view class="promo-title">巴丝淘企业服务</view>
+      <view class="promo-subtitle">专业服务，值得信赖</view>
+      <view class="promo-btn">去逛逛 ›</view>
+    </view>
+    <image src="/images/zh/banner2.png" mode="aspectFill" class="promo-img"/>
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="category-tabs">
+    <view class="tab-item active">热门精选</view>
+    <view class="tab-item">商标服务</view>
+    <view class="tab-item">公司注册</view>
+    <view class="tab-item">查看更多 ›</view>
+  </view>
+
+  <!-- 服务列表 -->
   <view class="section-title">{{t.servicesTitle}}</view>
   <view class="service-grid">
     <block wx:for="{{t.serviceList}}" wx:key="name">
@@ -27,6 +125,7 @@
       </view>
     </block>
   </view>
+
   <view class="section-title">{{t.whyTitle}}</view>
   <view class="card why">
     <view class="kazakh-line"></view>
@@ -35,4 +134,5 @@
     <view class="why-row">{{t.why3}}</view>
   </view>
 </view>
+
 <tabbar current="0"></tabbar>
