@@ -1,0 +1,23 @@
+<view class="lang-row light">
+  <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
+  <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
+  <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
+</view>
+<view class="container {{rtl?'rtl':''}}">
+  <view class="result-card {{status}}">
+    <view class="status-icon">{{icon}}</view>
+    <view class="r-title">{{title}}</view>
+    <view class="r-sub">{{t.trademark}}：{{keyword}}</view>
+    <view class="risk">{{risk}}</view>
+  </view>
+  <view class="card">
+    <view class="section-title mini">{{t.resultAdvice}}</view>
+    <view class="advice">{{advice}}</view>
+    <button class="btn btn-gold" bindtap="goConsult">{{t.consultReview}}</button>
+  </view>
+  <view class="card course">
+    <view class="course-title">{{t.courseTitle}}</view>
+    <view class="muted">{{t.courseSub}}</view>
+    <view class="small-btn">{{t.learnNow}}</view>
+  </view>
+</view>

@@ -1,0 +1,34 @@
+{
+  "lazyCodeLoading": "requiredComponents",
+  "pages": [
+    "pages/index/index",
+    "pages/query/query",
+    "pages/result/result",
+    "pages/services/services",
+    "pages/consult/consult",
+    "pages/webview/webview"
+  ],
+  "window": {
+    "navigationBarTitleText": "巴丝淘",
+    "navigationBarBackgroundColor": "#003D7A",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F6F8FB"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#667085",
+    "selectedColor": "#003D7A",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/query/query", "text": "商标查询" },
+      { "pagePath": "pages/services/services", "text": "服务" },
+      { "pagePath": "pages/consult/consult", "text": "获取方案" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "tabbar": "/components/tabbar/tabbar"
+  }
+}

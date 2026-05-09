@@ -1,0 +1,23 @@
+<view class="lang-pills">
+  <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
+  <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
+  <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
+</view>
+<view class="container {{rtl?'rtl':''}}">
+  <view class="query-head card">
+    <view class="kazakh-line"></view>
+    <view class="title">{{t.queryTitle}}</view>
+    <view class="muted">{{t.querySub}}</view>
+  </view>
+  <view class="card">
+    <input class="input" placeholder="{{t.keywordPh}}" value="{{keyword}}" bindinput="onKeyword" />
+    <picker range="{{t.countries}}" value="{{countryIndex}}" bindchange="onCountry"><view class="input picker">{{t.countryLabel}}：{{country}}</view></picker>
+    <picker range="{{t.cats}}" value="{{catIndex}}" bindchange="onCat"><view class="input picker">{{t.catLabel}}：{{category}}</view></picker>
+    <button class="btn btn-primary" bindtap="doQuery" disabled="{{loading}}">{{loading? (t.searching||'查询中...'): t.queryBtn}}</button>
+  </view>
+  <view class="card tips">
+    <view class="tips-title">{{t.queryGain}}</view>
+    <view>{{t.gain1}}</view><view>{{t.gain2}}</view><view>{{t.gain3}}</view>
+  </view>
+</view>
+<tabbar current="2"></tabbar>

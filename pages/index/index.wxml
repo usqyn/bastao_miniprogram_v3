@@ -1,0 +1,38 @@
+<view class="lang-pills">
+  <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
+  <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
+  <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
+</view>
+<view class="container {{rtl?'rtl':''}}">
+  <view class="hero">
+    <swiper class="hero-swiper" style="direction:ltr" indicator-dots autoplay circular indicator-active-color="#C9A961">
+      <swiper-item wx:for="{{t.heroBanners}}" wx:key="index">
+        <image src="{{item.image}}" mode="aspectFit" class="banner-img"/>
+      </swiper-item>
+    </swiper>
+    <view class="search-card">
+      <input class="hero-input" placeholder="{{t.placeholder}}" value="{{keyword}}" bindinput="onInput" />
+      <button class="btn btn-gold" bindtap="goQuery">{{t.queryBtn}}</button>
+      <button class="btn ghost" bindtap="goConsult">{{t.consultBtn}}</button>
+      <button class="btn ghost" open-type="contact">{{t.officialAccountBtn}}</button>
+    </view>
+  </view>
+  <view class="section-title">{{t.servicesTitle}}</view>
+  <view class="service-grid">
+    <block wx:for="{{t.serviceList}}" wx:key="name">
+      <view class="service-card" bindtap="goServices">
+        <view class="icon-box">{{item.icon}}</view>
+        <view class="s-name">{{item.name}}</view>
+        <view class="s-desc">{{item.desc}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="section-title">{{t.whyTitle}}</view>
+  <view class="card why">
+    <view class="kazakh-line"></view>
+    <view class="why-row">{{t.why1}}</view>
+    <view class="why-row">{{t.why2}}</view>
+    <view class="why-row">{{t.why3}}</view>
+  </view>
+</view>
+<tabbar current="0"></tabbar>

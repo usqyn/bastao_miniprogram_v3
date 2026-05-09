@@ -1,0 +1,16 @@
+<view class="lang-pills">
+  <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
+  <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
+  <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
+</view>
+<view class="container {{rtl?'rtl':''}}">
+  <view class="card top"><view class="kazakh-line"></view><view class="title">{{t.serviceTopTitle}}</view><view class="muted">{{t.serviceTopSub}}</view></view>
+  <block wx:for="{{t.serviceList}}" wx:key="name">
+    <view class="card service">
+      <view class="row"><view class="icon">{{item.icon}}</view><view><view class="name">{{item.name}}</view><view class="muted">{{item.desc}}</view></view></view>
+      <view class="tags"><text class="tag">{{t.tag1}}</text><text class="tag">{{t.tag2}}</text><text class="tag">{{t.tag3}}</text></view>
+      <button class="btn btn-primary" bindtap="goConsult">{{t.quote}}</button>
+    </view>
+  </block>
+</view>
+<tabbar current="3"></tabbar>

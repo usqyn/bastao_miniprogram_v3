@@ -1,0 +1,22 @@
+<view class="lang-pills">
+  <view class="lang-pill {{lang==='zh'?'active':''}}" data-lang="zh" bindtap="changeLang">中文</view>
+  <view class="lang-pill {{lang==='kkArab'?'active':''}}" data-lang="kkArab" bindtap="changeLang">قازاقشا</view>
+  <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
+</view>
+<view class="container {{rtl?'rtl':''}}">
+  <view class="card head"><view class="kazakh-line"></view><view class="title">{{t.consultTitle}}</view><view class="muted">{{t.consultSub}}</view></view>
+  <view class="card">
+    <input class="input" placeholder="{{t.namePh}}" bindinput="onName" />
+    <input class="input" placeholder="{{t.phonePh}}" type="number" bindinput="onPhone" />
+    <picker range="{{t.types}}" value="{{typeIndex}}" bindchange="onType"><view class="input picker">{{t.typeLabel}}：{{type}}</view></picker>
+    <button class="btn btn-gold" bindtap="submit" disabled="{{loading}}">{{loading? (t.submitting||'提交中...'): t.getPlan}}</button>
+  </view>
+  <view class="card contact">
+    <view class="qr-section">
+      <image src="{{t.qrcode}}" mode="aspectFit" class="qrcode"/>
+      <view class="qr-text">{{t.qrcodeText}}</view>
+    </view>
+    <view class="contact-item">✉️ {{t.emailText}}</view>
+  </view>
+</view>
+<tabbar current="4"></tabbar>
