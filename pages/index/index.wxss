@@ -99,6 +99,22 @@
   z-index: 10;
 }
 
+.rtl .quick-entry-card {
+  direction: rtl;
+}
+
+.rtl .quick-row {
+  flex-direction: row;
+}
+
+.rtl .quick-title {
+  font-weight: 500;
+}
+
+.rtl .quick-desc {
+  color: #666;
+}
+
 .quick-row {
   display: flex;
   justify-content: space-between;
@@ -106,6 +122,22 @@
 
 .quick-item {
   text-align: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.quick-item .quick-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.quick-item .quick-desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .quick-title {
@@ -118,6 +150,13 @@
 .quick-title .arrow {
   color: #C41E3A;
   margin-left: 8rpx;
+}
+
+.rtl .quick-title .arrow {
+  margin-left: 0;
+  margin-right: 8rpx;
+  transform: rotate(180deg);
+  display: inline-block;
 }
 
 .quick-desc {

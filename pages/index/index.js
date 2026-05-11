@@ -53,8 +53,10 @@ Page({
     wx.switchTab({ url: '/pages/query/query' })
   },
 
-  goConsult() {
-    wx.switchTab({ url: '/pages/consult/consult' })
+  goConsult(e) {
+    const index = e && e.currentTarget ? e.currentTarget.dataset.index : null
+    const url = index !== undefined && index !== null ? `/pages/consult/consult?type=${index}` : '/pages/consult/consult'
+    wx.switchTab({ url })
   },
 
   goServices() {

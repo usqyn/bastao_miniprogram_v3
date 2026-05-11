@@ -29,17 +29,17 @@
   <!-- 快捷入口卡片 -->
   <view class="quick-entry-card">
     <view class="quick-row">
-      <view class="quick-item" bindtap="goServices">
-        <view class="quick-title">商标注册 <text class="arrow">›</text></view>
-        <view class="quick-desc">专业代理</view>
+      <view class="quick-item" bindtap="goConsult" data-index="0">
+        <view class="quick-title">{{t.quickEntryTitle1}} <text class="arrow">›</text></view>
+        <view class="quick-desc">{{t.quickEntryDesc1}}</view>
       </view>
-      <view class="quick-item" bindtap="goServices">
-        <view class="quick-title">小程序开发 <text class="arrow">›</text></view>
-        <view class="quick-desc">网站开发</view>
+      <view class="quick-item" bindtap="goConsult" data-index="3">
+        <view class="quick-title">{{t.quickEntryTitle2}} <text class="arrow">›</text></view>
+        <view class="quick-desc">{{t.quickEntryDesc2}}</view>
       </view>
-      <view class="quick-item" bindtap="goServices">
-        <view class="quick-title">专利申请 <text class="arrow">›</text></view>
-        <view class="quick-desc">快速通道</view>
+      <view class="quick-item" bindtap="goConsult" data-index="4">
+        <view class="quick-title">{{t.quickEntryTitle3}} <text class="arrow">›</text></view>
+        <view class="quick-desc">{{t.quickEntryDesc3}}</view>
       </view>
     </view>
   </view>
@@ -48,7 +48,7 @@
   <view class="section-title">{{t.servicesTitle}}</view>
   <view class="service-grid">
     <block wx:for="{{t.serviceList}}" wx:key="name">
-      <view class="service-card" bindtap="goServices">
+      <view class="service-card" bindtap="goConsult" data-index="{{index}}">
         <view class="icon-box">{{item.icon}}</view>
         <view class="s-name">{{item.name}}</view>
         <view class="s-desc">{{item.desc}}</view>

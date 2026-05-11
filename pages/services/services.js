@@ -13,16 +13,32 @@ Page({
 
   onLoad() {
     applyLang(this)
+    this.updateFilteredProducts()
     this.updateCartInfo()
   },
 
   onShow() {
     applyLang(this)
+    this.updateFilteredProducts()
     this.updateCartInfo()
   },
 
   changeLang(e) {
     changeLang(this, e.currentTarget.dataset.lang)
+    this.updateFilteredProducts()
+  },
+
+  updateFilteredProducts() {
+    const t = this.data.t
+    const products = t.products || []
+    const activeCategory = this.data.activeCategory
+
+    let filtered = products
+    if (activeCategory > 0) {
+      filtered = products.filter(p => p.category === activeCategory)
+    }
+
+    this.setData({ filteredProducts: filtered })
   },
 
   // 更新购物车信息

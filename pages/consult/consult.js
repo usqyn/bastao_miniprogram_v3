@@ -1,9 +1,26 @@
 const { applyLang, changeLang } = require('../../i18n.js')
 const db = wx.cloud.database()
 
+const serviceToTypeMap = {
+  0: 1, 1: 1,
+  2: 3, 3: 4,
+  4: 2, 5: 2,
+  6: 5,
+  7: 0
+}
+
 Page({
   data:{name:'',phone:'',wechat:'',content:'',typeIndex:0,type:'',lang:'zh',t:{},rtl:false,loading:false},
-  onLoad(){ applyLang(this); this.syncType() },
+  onLoad(options){
+    applyLang(this)
+    if(options.type !== undefined && options.type !== null){
+      const typeIdx = serviceToTypeMap[options.type]
+      if(typeIdx !== undefined){
+        this.setData({typeIndex: typeIdx})
+      }
+    }
+    this.syncType()
+  },
   onShow(){ applyLang(this); this.syncType() },
   changeLang(e){ changeLang(this, e.currentTarget.dataset.lang); this.setData({typeIndex:0}); this.syncType() },
   syncType(){ const types=(this.data.t&&this.data.t.types)||[]; this.setData({type:types[this.data.typeIndex]||''}) },
