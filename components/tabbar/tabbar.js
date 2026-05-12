@@ -24,11 +24,26 @@ Component({
       this.setData({
         currentLang: lang,
         tabs: [
-          { icon: '🏠', text: t.tabs[0], path: '/pages/index/index' },
-          { icon: '🌐', text: t.tabs[1], path: '/pages/webview/webview' },
-          { icon: '🔍', text: t.tabs[2], path: '/pages/query/query' },
-          { icon: '🛠', text: t.tabs[3], path: '/pages/services/services' },
-          { icon: '📋', text: t.tabs[4], path: '/pages/consult/consult' }
+          {
+            icon: '/images/tabbar/home.jpg',
+            text: t.tabs[0],
+            path: '/pages/index/index'
+          },
+          {
+            icon: '/images/tabbar/query.jpg',
+            text: t.tabs[2],
+            path: '/pages/query/query'
+          },
+          {
+            icon: '/images/tabbar/shop.jpg',
+            text: t.tabs[3],
+            path: '/pages/services/services'
+          },
+          {
+            icon: '/images/tabbar/consult.jpg',
+            text: t.tabs[4],
+            path: '/pages/consult/consult'
+          }
         ]
       })
       this.startWatcher()
@@ -46,11 +61,7 @@ Component({
       const idx = e.currentTarget.dataset.index
       if (idx === this.data.current) return
       const path = this.data.tabs[idx].path
-      if (path === '/pages/webview/webview') {
-        wx.navigateTo({ url: path })
-      } else {
-        wx.switchTab({ url: path })
-      }
+      wx.switchTab({ url: path })
     }
   }
 })
