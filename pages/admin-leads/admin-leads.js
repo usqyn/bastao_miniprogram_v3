@@ -1,5 +1,5 @@
 // 客户线索管理页面
-const db = wx.cloud.database()
+const { LeadService } = require('../../services/supabase.js')
 
 Page({
   data: {
@@ -8,7 +8,7 @@ Page({
     username: '',
     password: '',
     loading: false,
-    
+
     // 线索数据
     leads: [],
     stats: {
@@ -17,17 +17,17 @@ Page({
       contacted: 0,
       closed: 0
     },
-    
+
     // 筛选和分页
     activeFilter: 'all',
     currentPage: 1,
     pageSize: 20,
     totalPages: 1,
     totalCount: 0,
-    
+
     // 选择状态
     allSelected: false,
-    
+
     // 状态选项
     statusOptions: [
       { value: 'pending', label: '新线索' },
@@ -104,89 +104,52 @@ Page({
   },
 
   // 加载数据
-  loadData() {
+  async loadData() {
     wx.showLoading({ title: '加载中...' })
 
-    const { activeFilter, currentPage, pageSize } = this.data
+    try {
+      const { activeFilter, currentPage, pageSize } = this.data
 
-    // 构建查询
-    let query = db.collection('customers')
-    if (activeFilter !== 'all') {
-      query = query.where({ status: activeFilter })
-    }
+      // 获取线索列表
+      const leads = await LeadService.list(activeFilter, currentPage, pageSize)
 
-    // 获取总数
-    query.count().then(countRes => {
-      const totalCount = countRes.total
+      // 获取统计
+      const stats = await LeadService.getStats()
+      const totalCount = stats.total
       const totalPages = Math.ceil(totalCount / pageSize) || 1
 
-      // 获取数据
-      const skip = (currentPage - 1) * pageSize
-      db.collection('customers')
-        .where(activeFilter === 'all' ? {} : { status: activeFilter })
-        .orderBy('createdAt', 'desc')
-        .skip(skip)
-        .limit(pageSize)
-        .get()
-        .then(dataRes => {
-          // 处理数据
-          const statusLabels = {
-            'pending': '新线索',
-            'contacted': '已联系',
-            'closed': '已关闭'
-          }
+      // 处理数据
+      const statusLabels = {
+        'pending': '新线索',
+        'contacted': '已联系',
+        'closed': '已关闭'
+      }
 
-          const leads = dataRes.data.map((item, index) => ({
-            ...item,
-            index: totalCount - skip - index,
-            timeStr: this.formatTime(item.createdAt),
-            statusLabel: statusLabels[item.status] || item.status,
-            statusIndex: this.data.statusOptions.findIndex(s => s.value === item.status),
-            selected: false
-          }))
+      const processedLeads = leads.map((item, index) => ({
+        ...item,
+        id: item.id,
+        _id: item.id,
+        index: totalCount - (currentPage - 1) * pageSize - index,
+        timeStr: this.formatTime(item.created_at),
+        statusLabel: statusLabels[item.status] || item.status,
+        statusIndex: this.data.statusOptions.findIndex(s => s.value === item.status),
+        selected: false
+      }))
 
-          this.setData({
-            leads,
-            totalCount,
-            totalPages,
-            allSelected: false
-          })
-
-          // 加载统计
-          this.loadStats()
-          wx.hideLoading()
-        })
-        .catch(err => {
-          console.error('获取数据失败:', err)
-          wx.hideLoading()
-          wx.showToast({ title: '加载失败', icon: 'none' })
-        })
-    }).catch(err => {
-      console.error('获取总数失败:', err)
-      wx.hideLoading()
-      wx.showToast({ title: '加载失败', icon: 'none' })
-    })
-  },
-
-  // 加载统计数据
-  loadStats() {
-    Promise.all([
-      db.collection('customers').count(),
-      db.collection('customers').where({ status: 'pending' }).count(),
-      db.collection('customers').where({ status: 'contacted' }).count(),
-      db.collection('customers').where({ status: 'closed' }).count()
-    ]).then(([total, pending, contacted, closed]) => {
       this.setData({
-        stats: {
-          total: total.total,
-          pending: pending.total,
-          contacted: contacted.total,
-          closed: closed.total
-        }
+        leads: processedLeads,
+        stats,
+        totalCount,
+        totalPages,
+        allSelected: false
       })
-    }).catch(err => {
-      console.error('加载统计失败:', err)
-    })
+
+    } catch (err) {
+      console.error('加载数据失败:', err)
+      wx.showToast({ title: '加载失败', icon: 'none' })
+    } finally {
+      wx.hideLoading()
+    }
   },
 
   // 刷新数据
@@ -228,7 +191,7 @@ Page({
   toggleSelect(e) {
     const id = e.currentTarget.dataset.id
     const leads = this.data.leads.map(item => {
-      if (item._id === id) {
+      if (item.id === id) {
         return { ...item, selected: !item.selected }
       }
       return item
@@ -238,19 +201,19 @@ Page({
   },
 
   // 修改状态
-  changeStatus(e) {
+  async changeStatus(e) {
     const id = e.currentTarget.dataset.id
     const index = parseInt(e.detail.value)
     const newStatus = this.data.statusOptions[index].value
 
-    db.collection('customers').doc(id).update({
-      data: { status: newStatus }
-    }).then(() => {
+    try {
+      await LeadService.updateStatus(id, newStatus)
       wx.showToast({ title: '状态已更新', icon: 'success' })
       this.loadData()
-    }).catch(err => {
+    } catch (err) {
+      console.error('更新状态失败:', err)
       wx.showToast({ title: '更新失败', icon: 'none' })
-    })
+    }
   },
 
   // 删除线索
@@ -260,23 +223,25 @@ Page({
     wx.showModal({
       title: '确认删除',
       content: '删除后无法恢复，确定要删除吗？',
-      success: (res) => {
+      success: async (res) => {
         if (res.confirm) {
-          db.collection('customers').doc(id).remove().then(() => {
+          try {
+            await LeadService.delete(id)
             wx.showToast({ title: '删除成功', icon: 'success' })
             this.loadData()
-          }).catch(err => {
+          } catch (err) {
+            console.error('删除失败:', err)
             wx.showToast({ title: '删除失败', icon: 'none' })
-          })
+          }
         }
       }
     })
   },
 
   // 格式化时间
-  formatTime(date) {
-    if (!date) return '—'
-    const d = new Date(date)
+  formatTime(isoString) {
+    if (!isoString) return '—'
+    const d = new Date(isoString)
     const year = d.getFullYear()
     const month = String(d.getMonth() + 1).padStart(2, '0')
     const day = String(d.getDate()).padStart(2, '0')
