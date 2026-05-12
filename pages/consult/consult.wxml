@@ -19,4 +19,4 @@
     <view class="contact-item">✉️ {{t.emailText}}</view>
   </view>
 </view>
-<tabbar current="3"></tabbar>
+<tabbar current="4"></tabbar>

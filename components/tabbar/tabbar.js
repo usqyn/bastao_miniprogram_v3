@@ -30,6 +30,11 @@ Component({
             path: '/pages/index/index'
           },
           {
+            icon: '/images/tabbar/web.jpg',
+            text: t.tabs[1],
+            path: '/pages/webview/webview'
+          },
+          {
             icon: '/images/tabbar/query.jpg',
             text: t.tabs[2],
             path: '/pages/query/query'
@@ -61,7 +66,11 @@ Component({
       const idx = e.currentTarget.dataset.index
       if (idx === this.data.current) return
       const path = this.data.tabs[idx].path
-      wx.switchTab({ url: path })
+      if (path === '/pages/webview/webview') {
+        wx.navigateTo({ url: path })
+      } else {
+        wx.switchTab({ url: path })
+      }
     }
   }
 })
