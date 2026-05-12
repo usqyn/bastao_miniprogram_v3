@@ -1,7 +1,6 @@
 // Supabase 配置
-// 请替换为你自己的 Supabase 项目配置
-const SUPABASE_URL = 'https://your-project.supabase.co'
-const SUPABASE_ANON_KEY = 'your-anon-key'
+const SUPABASE_URL = 'https://viunbdpfehuukhmlzcvn.supabase.co'
+const SUPABASE_ANON_KEY = 'sb_publishable_7KogZlxlHAi5DH_crh-Yxw_2B64sZjj'
 
 module.exports = {
   SUPABASE_URL,
