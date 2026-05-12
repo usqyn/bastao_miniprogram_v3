@@ -1,4 +1,4 @@
-/* 商城页面 */
+/* 商城页面 - 与首页风格统一 */
 .mall-page {
   padding-bottom: 180rpx;
   background: #F5F5F5;
@@ -8,8 +8,8 @@
 /* 顶部品牌区 */
 .mall-header {
   background: #fff;
-  padding: 28rpx 28rpx 24rpx;
-  margin-bottom: 16rpx;
+  padding: 28rpx 30rpx 24rpx;
+  margin-bottom: 2rpx;
 }
 
 .header-row {
@@ -43,7 +43,7 @@
   position: relative;
   width: 80rpx;
   height: 80rpx;
-  background: #FFF0F0;
+  background: #E8F4FD;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@
   right: -4rpx;
   min-width: 32rpx;
   height: 32rpx;
-  background: #C41E3A;
+  background: #003D7A;
   color: #fff;
   font-size: 20rpx;
   font-weight: 600;
@@ -75,8 +75,8 @@
 .category-bar {
   background: #fff;
   white-space: nowrap;
-  padding: 0 28rpx;
-  margin-bottom: 16rpx;
+  padding: 0 30rpx;
+  margin-bottom: 2rpx;
 }
 
 .category-list {
@@ -90,13 +90,13 @@
   justify-content: center;
   padding: 20rpx 32rpx;
   font-size: 28rpx;
-  color: #333;
+  color: #667085;
   position: relative;
   white-space: nowrap;
 }
 
 .category-item.active {
-  color: #C41E3A;
+  color: #003D7A;
   font-weight: 700;
 }
 
@@ -109,33 +109,34 @@
   width: 48rpx;
   height: 6rpx;
   border-radius: 3rpx;
-  background: #C41E3A;
+  background: #003D7A;
 }
 
 /* 商品双列网格 */
 .product-grid {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 16rpx;
-  gap: 16rpx;
+  padding: 16rpx;
+  justify-content: space-between;
 }
 
 /* 商品卡片 */
 .product-card {
-  width: calc(50% - 8rpx);
+  width: 345rpx;
   background: #fff;
-  border-radius: 16rpx;
+  border-radius: 24rpx;
   overflow: hidden;
-  margin-bottom: 16rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 28rpx rgba(0, 61, 122, 0.07);
 }
 
 /* 商品图片区 */
 .product-img-wrap {
   position: relative;
   width: 100%;
-  height: 340rpx;
+  height: 260rpx;
   overflow: hidden;
+  background: #F5F5F5;
 }
 
 .product-img {
@@ -148,7 +149,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #C41E3A;
+  background: #003D7A;
   color: #fff;
   font-size: 20rpx;
   font-weight: 700;
@@ -163,7 +164,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(90deg, #C41E3A, #E8384F);
+  background: linear-gradient(90deg, #003D7A, #0056A8);
   color: #fff;
   font-size: 20rpx;
   font-weight: 600;
@@ -174,18 +175,18 @@
 
 /* 商品信息区 */
 .product-info {
-  padding: 16rpx 20rpx 20rpx;
+  padding: 20rpx;
 }
 
 /* 卖点标题 */
 .product-slogan {
   font-size: 26rpx;
-  font-weight: 800;
-  color: #1A1A1A;
+  font-weight: 700;
+  color: #003D7A;
   line-height: 1.4;
   margin-bottom: 8rpx;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -214,15 +215,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8rpx;
-  margin-bottom: 12rpx;
+  margin-bottom: 16rpx;
 }
 
 .product-tag {
   display: inline-flex;
-  background: #FFF0F0;
-  color: #C41E3A;
-  border-radius: 6rpx;
-  padding: 4rpx 12rpx;
+  background: #E8F4FD;
+  color: #003D7A;
+  border-radius: 8rpx;
+  padding: 4rpx 14rpx;
   font-size: 20rpx;
 }
 
@@ -241,14 +242,14 @@
 
 .price-symbol {
   font-size: 24rpx;
-  font-weight: 800;
-  color: #C41E3A;
+  font-weight: 700;
+  color: #003D7A;
 }
 
 .price-num {
-  font-size: 40rpx;
-  font-weight: 800;
-  color: #C41E3A;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #003D7A;
   line-height: 1;
 }
 
@@ -261,17 +262,17 @@
 
 /* 加入购物车按钮 */
 .product-cart {
-  width: 56rpx;
-  height: 56rpx;
+  width: 52rpx;
+  height: 52rpx;
   border-radius: 50%;
-  background: #C41E3A;
+  background: #003D7A;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .product-cart .cart-icon {
-  font-size: 36rpx;
+  font-size: 32rpx;
   color: #fff;
   font-weight: 700;
 }
@@ -288,7 +289,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
 
@@ -302,7 +303,7 @@
   position: relative;
   width: 80rpx;
   height: 80rpx;
-  background: #C41E3A;
+  background: #003D7A;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -321,7 +322,7 @@
   min-width: 32rpx;
   height: 32rpx;
   background: #fff;
-  color: #C41E3A;
+  color: #003D7A;
   font-size: 20rpx;
   font-weight: 700;
   border-radius: 16rpx;
@@ -339,11 +340,11 @@
 .footer-cart-total .total-price {
   font-size: 32rpx;
   font-weight: 700;
-  color: #C41E3A;
+  color: #003D7A;
 }
 
 .footer-checkout {
-  background: #C41E3A;
+  background: #003D7A;
   color: #fff;
   padding: 20rpx 40rpx;
   border-radius: 40rpx;
@@ -355,7 +356,8 @@
 .lang-pills {
   display: flex;
   gap: 10rpx;
-  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background: #fff;
   direction: ltr !important;
 }
 
@@ -363,9 +365,9 @@
   font-size: 22rpx;
   padding: 10rpx 16rpx;
   border-radius: 999rpx;
-  background: #fff;
+  background: #E8F4FD;
   color: #003D7A;
-  border: 1rpx solid #D0D5DD;
+  border: 1rpx solid #B8D4E8;
 }
 
 .lang-pills .lang-pill.active {
