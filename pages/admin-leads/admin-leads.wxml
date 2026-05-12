@@ -1,0 +1,124 @@
+<!-- 登录页面 -->
+<view class="login-page" wx:if="{{!isLoggedIn}}">
+  <view class="login-card">
+    <view class="login-header">
+      <view class="login-icon">🔐</view>
+      <view class="login-title">客户线索管理</view>
+      <view class="login-subtitle">后台管理系统</view>
+    </view>
+
+    <view class="login-form">
+      <view class="form-item">
+        <view class="form-label">管理员账号</view>
+        <input class="form-input" placeholder="请输入账号" value="{{username}}" bindinput="onUsernameInput" />
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">密码</view>
+        <input class="form-input" type="password" placeholder="请输入密码" value="{{password}}" bindinput="onPasswordInput" />
+      </view>
+
+      <button class="login-btn {{loading ? 'loading' : ''}}" bindtap="handleLogin">
+        {{loading ? '登录中...' : '登 录'}}
+      </button>
+
+      <view class="login-tips">默认账号: admin / 密码: 123456</view>
+    </view>
+  </view>
+</view>
+
+<!-- 客户线索管理页面 -->
+<view class="admin-page" wx:if="{{isLoggedIn}}">
+  <!-- 头部 -->
+  <view class="admin-header">
+    <view class="header-title">客户线索管理</view>
+    <view class="header-actions">
+      <view class="header-btn secondary" bindtap="refreshData">
+        <text>⟳</text>
+        <text>刷新</text>
+      </view>
+      <view class="header-btn secondary" bindtap="handleLogout">
+        <text>→</text>
+        <text>退出</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-row">
+    <view class="stat-card">
+      <view class="stat-num">{{stats.total}}</view>
+      <view class="stat-label">总线索</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-num blue">{{stats.pending}}</view>
+      <view class="stat-label">新线索</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-num green">{{stats.contacted}}</view>
+      <view class="stat-label">已联系</view>
+    </view>
+    <view class="stat-card">
+      <view class="stat-num gray">{{stats.closed}}</view>
+      <view class="stat-label">已关闭</view>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view class="filter-item {{activeFilter === 'all' ? 'active' : ''}}" bindtap="filterByStatus" data-status="all">全部</view>
+    <view class="filter-item {{activeFilter === 'pending' ? 'active' : ''}}" bindtap="filterByStatus" data-status="pending">新线索</view>
+    <view class="filter-item {{activeFilter === 'contacted' ? 'active' : ''}}" bindtap="filterByStatus" data-status="contacted">已联系</view>
+    <view class="filter-item {{activeFilter === 'closed' ? 'active' : ''}}" bindtap="filterByStatus" data-status="closed">已关闭</view>
+  </view>
+
+  <!-- 数据表格 -->
+  <view class="table-container">
+    <!-- 表头 -->
+    <view class="table-header">
+      <view class="table-col col-check">
+        <view class="checkbox {{allSelected ? 'checked' : ''}}" bindtap="toggleSelectAll">✓</view>
+      </view>
+      <view class="table-col col-id">ID</view>
+      <view class="table-col col-time">提交时间</view>
+      <view class="table-col col-name">姓名</view>
+      <view class="table-col col-phone">联系电话</view>
+      <view class="table-col col-type">服务类型</view>
+      <view class="table-col col-status">状态</view>
+      <view class="table-col col-action">操作</view>
+    </view>
+
+    <!-- 数据行 -->
+    <view class="table-row" wx:for="{{leads}}" wx:key="_id">
+      <view class="table-col col-check">
+        <view class="checkbox {{item.selected ? 'checked' : ''}}" bindtap="toggleSelect" data-id="{{item._id}}">✓</view>
+      </view>
+      <view class="table-col col-id">{{item.index}}</view>
+      <view class="table-col col-time">{{item.timeStr}}</view>
+      <view class="table-col col-name">{{item.name}}</view>
+      <view class="table-col col-phone">{{item.phone}}</view>
+      <view class="table-col col-type">{{item.type || '—'}}</view>
+      <view class="table-col col-status">
+        <picker mode="selector" range="{{statusOptions}}" range-key="label" value="{{item.statusIndex}}" bindchange="changeStatus" data-id="{{item._id}}">
+          <view class="status-tag status-{{item.status}}">{{item.statusLabel}}</view>
+        </picker>
+      </view>
+      <view class="table-col col-action">
+        <view class="action-btn delete" bindtap="deleteLead" data-id="{{item._id}}">🗑️</view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{leads.length === 0}}">
+      <view class="empty-icon">📋</view>
+      <view class="empty-text">暂无线索数据</view>
+    </view>
+  </view>
+
+  <!-- 分页 -->
+  <view class="pagination" wx:if="{{totalPages > 1}}">
+    <view class="page-btn" bindtap="prevPage" wx:if="{{currentPage > 1}}">上一页</view>
+    <view class="page-info">第 {{currentPage}} / {{totalPages}} 页</view>
+    <view class="page-btn" bindtap="nextPage" wx:if="{{currentPage < totalPages}}">下一页</view>
+  </view>
+</view>
