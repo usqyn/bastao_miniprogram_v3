@@ -14,12 +14,6 @@
       <swiper-item wx:for="{{banners}}" wx:key="id">
         <view class="banner-item">
           <image src="{{item.image}}" mode="aspectFill" class="banner-bg"/>
-          <view class="banner-overlay">
-            <view class="banner-brand">BASTAO</view>
-            <view class="banner-title">{{item.title}}</view>
-            <view class="banner-subtitle">{{item.subtitle}}</view>
-            <view class="banner-cities">深圳、广州、东莞、佛山、武汉、长沙、成都、重庆、杭州...</view>
-          </view>
         </view>
       </swiper-item>
     </swiper>
