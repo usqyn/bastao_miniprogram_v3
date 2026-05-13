@@ -106,11 +106,12 @@ Page({
   },
 
   // 跳转到数据统计
-  goStats() {
-    // 已在当前页
+  goStats() {},
+
+  goLeads() {
+    wx.navigateTo({ url: '/pages/admin-leads/admin-leads' })
   },
 
-  // 退出登录
   handleLogout() {
     wx.showModal({
       title: '提示',

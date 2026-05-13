@@ -25,6 +25,10 @@
       <view class="nav-icon">📊</view>
       <view class="nav-text">数据统计</view>
     </view>
+    <view class="nav-item" bindtap="goLeads">
+      <view class="nav-icon">👥</view>
+      <view class="nav-text">客户线索</view>
+    </view>
   </view>
 
   <!-- 统计卡片 -->

@@ -265,7 +265,7 @@
   width: 52rpx;
   height: 52rpx;
   border-radius: 50%;
-  background: #003D7A;
+  background: linear-gradient(135deg, #003D7A, #008B8B);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -344,7 +344,7 @@
 }
 
 .footer-checkout {
-  background: #003D7A;
+  background: linear-gradient(135deg, #003D7A, #008B8B);
   color: #fff;
   padding: 20rpx 40rpx;
   border-radius: 40rpx;
