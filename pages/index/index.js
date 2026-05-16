@@ -1,4 +1,4 @@
-const { applyLang, changeLang } = require('../../i18n.js')
+const { applyLang, changeLang, getLang } = require('../../i18n.js')
 
 Page({
   data: {
@@ -18,11 +18,25 @@ Page({
 
   onLoad() {
     applyLang(this)
+    this.updateBanners()
   },
 
   onShow() {
     applyLang(this)
+    this.updateBanners()
     this.filterServices()
+  },
+
+  updateBanners() {
+    const lang = getLang()
+    const imagePath = `/images/${lang}/`
+    this.setData({
+      banners: [
+        { id: 1, image: imagePath + 'banner1.png', title: '2060+', subtitle: '全国服务门店为你服务' },
+        { id: 2, image: imagePath + 'banner2.png', title: '专业团队', subtitle: '一对一专属顾问服务' },
+        { id: 3, image: imagePath + 'banner3.png', title: '品质保障', subtitle: '全程跟踪直至完成' }
+      ]
+    })
   },
 
   filterServices() {

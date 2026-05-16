@@ -1,3 +1,4 @@
 .title{font-size:42rpx;font-weight:900;color:#003D7A;margin:22rpx 0 12rpx}.picker{display:flex;align-items:center;color:#344054}.tips{line-height:2;color:#344054}.tips-title{font-weight:800;color:#003D7A;font-size:31rpx;margin-bottom:10rpx}
 .lang-pills{display:flex;gap:10rpx;margin-bottom:20rpx}.lang-pills .lang-pill{font-size:22rpx;padding:10rpx 16rpx;border-radius:999rpx;background:#fff;color:#003D7A;border:1rpx solid #D0D5DD}.lang-pills .lang-pill.active{background:#C9A961;color:#fff;border-color:#C9A961}
 button.btn{border:0}button.btn::after{border:0}
+.container{padding-bottom:140rpx}

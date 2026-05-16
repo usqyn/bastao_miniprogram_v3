@@ -23,7 +23,7 @@
 
 /* 容器 */
 .container {
-  padding: 0 20rpx 40rpx;
+  padding: 0 20rpx 140rpx;
   background: #F5F5F5;
   min-height: 100vh;
 }

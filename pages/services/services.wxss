@@ -1,6 +1,6 @@
 /* 商城页面 - 与首页风格统一 */
 .mall-page {
-  padding-bottom: 180rpx;
+  padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
   background: #F5F5F5;
   min-height: 100vh;
 }
