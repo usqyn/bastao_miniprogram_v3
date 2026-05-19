@@ -17,7 +17,7 @@ Page({
       spec: '',
       badge: '',
       promo: '',
-      image: '/images/zh/banner1.webp',
+      image: '/images/zh/banner1.png',
       tags: []
     }
   },
@@ -48,7 +48,7 @@ Page({
         name: '商标注册套餐',
         slogan: '【品牌保护首选】',
         spec: '含查询+分类+递交全流程',
-        image: '/images/zh/banner1.webp',
+        image: '/images/zh/banner1.png',
         badge: 'HOT',
         promo: '限时优惠 立减¥200',
         price: '1280',
@@ -61,7 +61,7 @@ Page({
         name: '商标设计服务',
         slogan: '【融合哈萨克文化】',
         spec: '品牌命名+Logo设计',
-        image: '/images/zh/banner2.webp',
+        image: '/images/zh/banner2.png',
         badge: '新品',
         promo: '',
         price: '2680',
@@ -74,7 +74,7 @@ Page({
         name: '中国公司注册',
         slogan: '【一站式代办】',
         spec: '营业执照+税务登记+银行开户',
-        image: '/images/zh/banner3.webp',
+        image: '/images/zh/banner3.png',
         badge: '',
         promo: '买1享3 赠记账3个月',
         price: '3980',
@@ -123,7 +123,7 @@ Page({
         spec: '',
         badge: '',
         promo: '',
-        image: '/images/zh/banner1.webp',
+        image: '/images/zh/banner1.png',
         tags: []
       }
     })

@@ -5,9 +5,9 @@ module.exports = {
   submitOk:'تاپسىرىلدى',
    submitNeed:'اتى جونڭىزدى جانە تەلەفون نومىرىن تولتىرىڭىز',
   heroBanners:[
-    {image:'/images/kkArab/banner1.webp'},
-    {image:'/images/kkArab/banner2.webp'},
-    {image:'/images/kkArab/banner3.webp'}
+    {image:'/images/kkArab/banner1.png'},
+    {image:'/images/kkArab/banner2.png'},
+    {image:'/images/kkArab/banner3.png'}
   ],
   queryBtn:'ماركانى تەگىن تەكسەرۋ',
   consultBtn:'كەڭەس الۋ',
@@ -59,7 +59,7 @@ module.exports = {
   getPlan:'جوسپار الۋ',
   phoneText:'تەلەفون: نومىرىڭىزدى جازىڭىز',
   wechatText:'WeChat: ۇيشات نومىرىڭىز',
-  qrcode:'/images/qrcode.webp',
+  qrcode:'/images/qrcode.png',
   qrcodeText:'ۇنعات نومىرىنە قوسلىڭىز',
   emailText:'Email: service@bastao.cn',
   types:['سەرىكتىك  تىزىمدەۋ','تاۋار ماركاسى','پاتەنت وتىنىشى','تور سايت جاساۋ','شاعىن باعدارلاما اشۋ','كۋرس/باعدارلاما قىزمەتى','باسقا'],
@@ -72,14 +72,14 @@ module.exports = {
   goShop:'سېتىپ الۋ',
   selectAll:'بارلىعى танداۋ',
   products:[
-    {id:1,name:'تاۋار ماركاسىن تىزىمدەۋ پاكەتى',slogan:'[ماركا قورعايىنىڭ بىرىنشى тандаۋى]',spec:'تەكسەرۋ + سانات + جىبەرۋ',image:'/images/kkArab/banner1.webp',badge:'قىزۋ',promo:'شەگەرمەلى اقشا تازارتۋ 200 يۋان',price:'1280',originalPrice:'1480',tags:['ءۇش تىل','كەڭەسشى اتقارادى'],category:1},
-    {id:2,name:'تاۋار ماركاسىن ديزاين قىزمەتى',slogan:'[قازاق مادەنيەتىمەن ۇيلەسۋ]',spec:'اتاۋ + Logo ديزاين',image:'/images/kkArab/banner2.webp',badge:'جاڭا',promo:'',price:'2680',originalPrice:'',tags:['تولىق ديزاين','ءۇش تىل'],category:1},
-    {id:3,name:'جۇڭگودا كومپانيا تىزىمدەۋ',slogan:'[بىر تۇتاس اتقارۋ]',spec:'كىسىپتىك كۋازە + سالاقتىق تىزىم + بانكە شوت',image:'/images/kkArab/banner3.webp',badge:'',promo:'1 ساتىپ 3 الۋ 3 ايلىق ەسەپ جازۋ سىڭىز',price:'3980',originalPrice:'5680',tags:['تولىق اتقارۋ','اشىق باعا'],category:2},
-    {id:4,name:'قازاقستاندا كومپانيا تىزىمدەۋ',slogan:'[شەتەل دانەكەر]',spec:'جۇڭگو-قازاق ەكى تىلدى قىزمەت',image:'/images/kkArab/banner1.webp',badge:'ۇсыنىلادى',promo:'',price:'8800',originalPrice:'',tags:['ءۇش تىل','يەرلىك'],category:2},
-    {id:5,name:'بىرلىك سايت جاساۋ',slogan:'[كۆپ تىلدە كورسەتىلى]',spec:'جۇڭگو/قازاق/ورىس ەكى تىلدى سايت',image:'/images/kkArab/banner2.webp',badge:'',promo:'شەگەرمەلى SEO وڭدەۋ سىڭىز',price:'5980',originalPrice:'7980',tags:['ىقساۋ','ءۇش تىل'],category:3},
-    {id:6,name:'WeChat شاعىن باعدارلاما جاساۋ',slogan:'[جۇتىۋ قۇرالداۋ]',spec:'دۇكەن/جاڭاۋ/ فورما جۇتىۋ',image:'/images/kkArab/banner3.webp',badge:'بوم',promo:'1 ساتىپ 2 الۋ باشقارۋ پانەلەنى سىڭىز',price:'4980',originalPrice:'6980',tags:['دايىن جاساۋ','كەپىلەۋ'],category:3},
-    {id:7,name:'پاتەنت وتىنىشى',slogan:'[كەڭەسشى الاتقارۋ]',spec:'ىزدەۋ/پايدىلى نۇسقا/سىرتقى ديزاين',image:'/images/kkArab/banner1.webp',badge:'',promo:'',price:'3800',originalPrice:'5000',tags:['تولىق باقىلاۋ','جوعارقى وتۋ'],category:4},
-    {id:8,name:'تاۋار ماركاسىن قاۋىپتەن ساقتانۋ كۋرسى',slogan:'[9.9 يۋان ساتىپ الۋ]',spec:'ۋيدېو كۋرس + قۇرال ۇلگى',image:'/images/kkArab/banner2.webp',badge:'ارزانات',promo:'100 دان شەكتى',price:'9.9',originalPrice:'199',tags:'Online oqıw,forever',category:5}
+    {id:1,name:'تاۋار ماركاسىن تىزىمدەۋ پاكەتى',slogan:'[ماركا قورعايىنىڭ بىرىنشى тандаۋى]',spec:'تەكسەرۋ + سانات + جىبەرۋ',image:'/images/kkArab/banner1.png',badge:'قىزۋ',promo:'شەگەرمەلى اقشا تازارتۋ 200 يۋان',price:'1280',originalPrice:'1480',tags:['ءۇش تىل','كەڭەسشى اتقارادى'],category:1},
+    {id:2,name:'تاۋار ماركاسىن ديزاين قىزمەتى',slogan:'[قازاق مادەنيەتىمەن ۇيلەسۋ]',spec:'اتاۋ + Logo ديزاين',image:'/images/kkArab/banner2.png',badge:'جاڭا',promo:'',price:'2680',originalPrice:'',tags:['تولىق ديزاين','ءۇش تىل'],category:1},
+    {id:3,name:'جۇڭگودا كومپانيا تىزىمدەۋ',slogan:'[بىر تۇتاس اتقارۋ]',spec:'كىسىپتىك كۋازە + سالاقتىق تىزىم + بانكە شوت',image:'/images/kkArab/banner3.png',badge:'',promo:'1 ساتىپ 3 الۋ 3 ايلىق ەسەپ جازۋ سىڭىز',price:'3980',originalPrice:'5680',tags:['تولىق اتقارۋ','اشىق باعا'],category:2},
+    {id:4,name:'قازاقستاندا كومپانيا تىزىمدەۋ',slogan:'[شەتەل دانەكەر]',spec:'جۇڭگو-قازاق ەكى تىلدى قىزمەت',image:'/images/kkArab/banner1.png',badge:'ۇсыنىلادى',promo:'',price:'8800',originalPrice:'',tags:['ءۇش تىل','يەرلىك'],category:2},
+    {id:5,name:'بىرلىك سايت جاساۋ',slogan:'[كۆپ تىلدە كورسەتىلى]',spec:'جۇڭگو/قازاق/ورىس ەكى تىلدى سايت',image:'/images/kkArab/banner2.png',badge:'',promo:'شەگەرمەلى SEO وڭدەۋ سىڭىز',price:'5980',originalPrice:'7980',tags:['ىقساۋ','ءۇش تىل'],category:3},
+    {id:6,name:'WeChat شاعىن باعدارلاما جاساۋ',slogan:'[جۇتىۋ قۇرالداۋ]',spec:'دۇكەن/جاڭاۋ/ فورما جۇتىۋ',image:'/images/kkArab/banner3.png',badge:'بوم',promo:'1 ساتىپ 2 الۋ باشقارۋ پانەلەنى سىڭىز',price:'4980',originalPrice:'6980',tags:['دايىن جاساۋ','كەپىلەۋ'],category:3},
+    {id:7,name:'پاتەنت وتىنىشى',slogan:'[كەڭەسشى الاتقارۋ]',spec:'ىزدەۋ/پايدىلى نۇسقا/سىرتقى ديزاين',image:'/images/kkArab/banner1.png',badge:'',promo:'',price:'3800',originalPrice:'5000',tags:['تولىق باقىلاۋ','جوعارقى وتۋ'],category:4},
+    {id:8,name:'تاۋار ماركاسىن قاۋىپتەن ساقتانۋ كۋرسى',slogan:'[9.9 يۋان ساتىپ الۋ]',spec:'ۋيدېو كۋرس + قۇرال ۇلگى',image:'/images/kkArab/banner2.png',badge:'ارزانات',promo:'100 دان شەكتى',price:'9.9',originalPrice:'199',tags:'Online oqıw,forever',category:5}
   ],
   serviceTopTitle:'باستاۋ قىزمەت وتەۋ تۇرلەرى',
   serviceTopSub:'الەمدىك ساۋدا جانە سيپىرلىق بىر تۇتاس شەشىم',

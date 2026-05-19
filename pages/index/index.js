@@ -10,9 +10,9 @@ Page({
     filteredServices: [],
     // 轮播图数据
     banners: [
-      { id: 1, image: '/images/zh/banner1.webp', title: '2060+', subtitle: '全国服务门店为你服务' },
-      { id: 2, image: '/images/zh/banner2.webp', title: '专业团队', subtitle: '一对一专属顾问服务' },
-      { id: 3, image: '/images/zh/banner3.webp', title: '品质保障', subtitle: '全程跟踪直至完成' }
+      { id: 1, image: '/images/zh/banner1.png', title: '2060+', subtitle: '全国服务门店为你服务' },
+      { id: 2, image: '/images/zh/banner2.png', title: '专业团队', subtitle: '一对一专属顾问服务' },
+      { id: 3, image: '/images/zh/banner3.png', title: '品质保障', subtitle: '全程跟踪直至完成' }
     ]
   },
 
@@ -36,9 +36,9 @@ Page({
     const timestamp = Date.now()
     this.setData({
       banners: [
-        { id: 1, image: imagePath + 'banner1.webp?v=' + timestamp },
-        { id: 2, image: imagePath + 'banner2.webp?v=' + timestamp },
-        { id: 3, image: imagePath + 'banner3.webp?v=' + timestamp }
+        { id: 1, image: imagePath + 'banner1.png?v=' + timestamp },
+        { id: 2, image: imagePath + 'banner2.png?v=' + timestamp },
+        { id: 3, image: imagePath + 'banner3.png?v=' + timestamp }
       ]
     })
   },

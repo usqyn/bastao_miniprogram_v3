@@ -25,27 +25,27 @@ Component({
         currentLang: lang,
         tabs: [
           {
-            icon: '/images/tabbar/home.webp',
+            icon: '/images/tabbar/home.png',
             text: t.tabs[0],
             path: '/pages/index/index'
           },
           {
-            icon: '/images/tabbar/web.webp',
+            icon: '/images/tabbar/web.png',
             text: t.tabs[1],
             path: '/pages/webview/webview'
           },
           {
-            icon: '/images/tabbar/query.webp',
+            icon: '/images/tabbar/query.png',
             text: t.tabs[2],
             path: '/pages/query/query'
           },
           {
-            icon: '/images/tabbar/shop.webp',
+            icon: '/images/tabbar/shop.png',
             text: t.tabs[3],
             path: '/pages/services/services'
           },
           {
-            icon: '/images/tabbar/consult.webp',
+            icon: '/images/tabbar/consult.png',
             text: t.tabs[4],
             path: '/pages/consult/consult'
           }
