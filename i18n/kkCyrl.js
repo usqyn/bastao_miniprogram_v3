@@ -5,9 +5,9 @@ module.exports = {
   submitOk:'Жіберілді',
   submitNeed:'Атыңызды және телефонды толтырыңыз',
   heroBanners:[
-    {image:'/images/kkCyrl/banner1.png'},
-    {image:'/images/kkCyrl/banner2.png'},
-    {image:'/images/kkCyrl/banner3.png'}
+    {image:'/images/kkCyrl/banner1.webp'},
+    {image:'/images/kkCyrl/banner2.webp'},
+    {image:'/images/kkCyrl/banner3.webp'}
   ],
   queryBtn:'Тауар белгісін тексеру',
   consultBtn:'Кеңес алу',
@@ -59,7 +59,7 @@ module.exports = {
   getPlan:'Жоспар алу',
   phoneText:'Телефон: нөміріңізді қойыңыз',
   wechatText:'WeChat: вичатыңызды қойыңыз',
-  qrcode:'/images/qrcode.png',
+  qrcode:'/images/qrcode.webp',
   qrcodeText:'Ретсетке қосылыңыз',
   emailText:'Email: service@bastao.cn',
   types:['Компания тіркеу','Тауар белгісі','Патент өтініші','Сайт жасау','Шағын бағдарлама','Курс/бағдарлама қызметі','Басқа'],
@@ -72,14 +72,14 @@ module.exports = {
   goShop:'Сатып алу',
   selectAll:'Барлығын таңдау',
   products:[
-    {id:1,name:'Тауар белгісін тіркеу пакеті',slogan:'[Бренд қорғау бірінші таңдау]',spec:'Тексеру + Санат + Жіберу',image:'/images/kkCyrl/banner1.png',badge:'Hot',promo:'Шектеулі жеңілдік 200 юань шегерім',price:'1280',originalPrice:'1480',tags:['Үш тіл','Кеңесші атқарады'],category:1},
-    {id:2,name:'Тауар белгісі дизайн қызметі',slogan:'[Қазақ мәдениетімен үйлесім]',spec:'Атау + Logo дизайн',image:'/images/kkCyrl/banner2.png',badge:'Жаңа',promo:'',price:'2680',originalPrice:'',tags:['Толық дизайн','Үш тіл'],category:1},
-    {id:3,name:'Қытайда компания тіркеу',slogan:'[Бір терезеден атқару]',spec:'Күзет + Салық тіркеу + Банк шот',image:'/images/kkCyrl/cart.png',badge:'',promo:'1 сатып 3 алу, 3 ай есеп жазбасы сыйлайды',price:'3980',originalPrice:'5680',tags:['Толық атқару','Ашық баға'],category:2},
-    {id:4,name:'Қазақстанда компания тіркеу',slogan:'[Шетел данакеры]',spec:'Қытай-Қазақ екі тілді қызмет',image:'/images/kkCyrl/banner1.png',badge:'Ұсынылады',promo:'',price:'8800',originalPrice:'',tags:['Үш тіл','Жергілікті'],category:2},
-    {id:5,name:'Бренд сайт жасау',slogan:'[Көп тілді көрсету]',spec:'Қытай/Қазақ/Орыс екі тілді сайт',image:'/images/kkCyrl/banner2.png',badge:'',promo:'Шектеулі SEO оңтайландыру сыйлайды',price:'5980',originalPrice:'7980',tags:['Адаптивті','Үш тіл'],category:3},
-    {id:6,name:'WeChat шағын бағдарлама жасау',slogan:'[Түткіш құрал]',spec:'Дүкен/Бронь/Форма түткіш',image:'/images/kkCyrl/banner3.png',badge:'Бом',promo:'1 сатып 2 алу, басқару панелін сыйлайды',price:'4980',originalPrice:'6980',tags:['Дайын жасау','Кепіл'],category:3},
-    {id:7,name:'Патент өтініші',slogan:'[Кеңесші атқарады]',spec:'Іздеу/Пайдалы модель/Сыртқы дизайн',image:'/images/kkCyrl/banner1.png',badge:'',promo:'',price:'3800',originalPrice:'5000',tags:['Толық бақылау','Жоғары өту'],category:4},
-    {id:8,name:'Тауар белгісінен қауіптен сақтану курсы',slogan:'[9.9 юань сатып алу]',spec:'Видео курс + Құрал үлгілері',image:'/images/kkCyrl/banner2.png',badge:'Арзан',promo:'100 дана шектелген',price:'9.9',originalPrice:'199',tags:['Онлайн оқу','Мәңгі көру'],category:5}
+    {id:1,name:'Тауар белгісін тіркеу пакеті',slogan:'[Бренд қорғау бірінші таңдау]',spec:'Тексеру + Санат + Жіберу',image:'/images/kkCyrl/banner1.webp',badge:'Hot',promo:'Шектеулі жеңілдік 200 юань шегерім',price:'1280',originalPrice:'1480',tags:['Үш тіл','Кеңесші атқарады'],category:1},
+    {id:2,name:'Тауар белгісі дизайн қызметі',slogan:'[Қазақ мәдениетімен үйлесім]',spec:'Атау + Logo дизайн',image:'/images/kkCyrl/banner2.webp',badge:'Жаңа',promo:'',price:'2680',originalPrice:'',tags:['Толық дизайн','Үш тіл'],category:1},
+    {id:3,name:'Қытайда компания тіркеу',slogan:'[Бір терезеден атқару]',spec:'Күзет + Салық тіркеу + Банк шот',image:'/images/kkCyrl/cart.webp',badge:'',promo:'1 сатып 3 алу, 3 ай есеп жазбасы сыйлайды',price:'3980',originalPrice:'5680',tags:['Толық атқару','Ашық баға'],category:2},
+    {id:4,name:'Қазақстанда компания тіркеу',slogan:'[Шетел данакеры]',spec:'Қытай-Қазақ екі тілді қызмет',image:'/images/kkCyrl/banner1.webp',badge:'Ұсынылады',promo:'',price:'8800',originalPrice:'',tags:['Үш тіл','Жергілікті'],category:2},
+    {id:5,name:'Бренд сайт жасау',slogan:'[Көп тілді көрсету]',spec:'Қытай/Қазақ/Орыс екі тілді сайт',image:'/images/kkCyrl/banner2.webp',badge:'',promo:'Шектеулі SEO оңтайландыру сыйлайды',price:'5980',originalPrice:'7980',tags:['Адаптивті','Үш тіл'],category:3},
+    {id:6,name:'WeChat шағын бағдарлама жасау',slogan:'[Түткіш құрал]',spec:'Дүкен/Бронь/Форма түткіш',image:'/images/kkCyrl/banner3.webp',badge:'Бом',promo:'1 сатып 2 алу, басқару панелін сыйлайды',price:'4980',originalPrice:'6980',tags:['Дайын жасау','Кепіл'],category:3},
+    {id:7,name:'Патент өтініші',slogan:'[Кеңесші атқарады]',spec:'Іздеу/Пайдалы модель/Сыртқы дизайн',image:'/images/kkCyrl/banner1.webp',badge:'',promo:'',price:'3800',originalPrice:'5000',tags:['Толық бақылау','Жоғары өту'],category:4},
+    {id:8,name:'Тауар белгісінен қауіптен сақтану курсы',slogan:'[9.9 юань сатып алу]',spec:'Видео курс + Құрал үлгілері',image:'/images/kkCyrl/banner2.webp',badge:'Арзан',promo:'100 дана шектелген',price:'9.9',originalPrice:'199',tags:['Онлайн оқу','Мәңгі көру'],category:5}
   ],
   serviceTopTitle:'Bastao қызметтері',
   serviceTopSub:'Жаһандық бизнес жана цифрлық бір тұтас шешім',
