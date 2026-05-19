@@ -9,13 +9,22 @@ Page({
   onCountry(e){ this.setData({countryIndex:Number(e.detail.value)}); this.syncPickers() },
   onCat(e){ this.setData({catIndex:Number(e.detail.value)}); this.syncPickers() },
   doQuery(){
-    if(!this.data.keyword){ wx.showToast({title:this.data.t.emptyKeyword, icon:'none'}); return }
+    if(!this.data.keyword || !this.data.keyword.trim()){ 
+      wx.showToast({title:this.data.t.emptyKeyword, icon:'none'}); 
+      return 
+    }
     this.setData({loading:true})
-    setTimeout(()=>{
-      const pool=['available','registered','unknown'];
-      const status=pool[this.data.keyword.length%3];
+    try {
+      setTimeout(()=>{
+        const pool=['available','registered','unknown'];
+        const keywordLen = (this.data.keyword || '').length
+        const status=pool[keywordLen % 3];
+        this.setData({loading:false})
+        wx.navigateTo({url:`/pages/result/result?keyword=${encodeURIComponent(this.data.keyword)}&country=${encodeURIComponent(this.data.country)}&category=${encodeURIComponent(this.data.category)}&status=${status}`})
+      },800)
+    } catch(e) {
       this.setData({loading:false})
-      wx.navigateTo({url:`/pages/result/result?keyword=${encodeURIComponent(this.data.keyword)}&country=${encodeURIComponent(this.data.country)}&category=${encodeURIComponent(this.data.category)}&status=${status}`})
-    },800)
+      wx.showToast({title: '查询失败', icon: 'none'})
+    }
   }
 })

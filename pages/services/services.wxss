@@ -280,7 +280,7 @@
 /* 底部购物车栏 */
 .mall-footer {
   position: fixed;
-  bottom: 100rpx;
+  bottom: calc(120rpx + env(safe-area-inset-bottom));
   left: 20rpx;
   right: 20rpx;
   background: #fff;

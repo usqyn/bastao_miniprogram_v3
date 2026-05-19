@@ -68,6 +68,9 @@ module.exports = {
   categories:['Барлығы','Тауар белгісі','Компания','Цифрлық','Патент','Курс құрал'],
   total:'Жалпы',
   checkout:'Төлеу',
+  cartEmpty:'Себет бос',
+  goShop:'Сатып алу',
+  selectAll:'Барлығын таңдау',
   products:[
     {id:1,name:'Тауар белгісін тіркеу пакеті',slogan:'[Бренд қорғау бірінші таңдау]',spec:'Тексеру + Санат + Жіберу',image:'/images/kkCyrl/banner1.png',badge:'Hot',promo:'Шектеулі жеңілдік 200 юань шегерім',price:'1280',originalPrice:'1480',tags:['Үш тіл','Кеңесші атқарады'],category:1},
     {id:2,name:'Тауар белгісі дизайн қызметі',slogan:'[Қазақ мәдениетімен үйлесім]',spec:'Атау + Logo дизайн',image:'/images/kkCyrl/banner2.png',badge:'Жаңа',promo:'',price:'2680',originalPrice:'',tags:['Толық дизайн','Үш тіл'],category:1},

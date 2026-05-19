@@ -43,19 +43,24 @@ Page({
 
   // 更新购物车信息
   updateCartInfo() {
-    const cart = wx.getStorageSync('cart') || []
-    let cartCount = 0
-    let cartTotal = 0
+    try {
+      const cart = wx.getStorageSync('cart') || []
+      let cartCount = 0
+      let cartTotal = 0
 
-    cart.forEach(item => {
-      cartCount += item.quantity
-      cartTotal += parseFloat(item.price) * item.quantity
-    })
+      cart.forEach(item => {
+        cartCount += item.quantity
+        cartTotal += parseFloat(item.price) * item.quantity
+      })
 
-    this.setData({
-      cartCount,
-      cartTotal: cartTotal.toFixed(2)
-    })
+      this.setData({
+        cartCount,
+        cartTotal: cartTotal.toFixed(2)
+      })
+    } catch (e) {
+      console.error('更新购物车信息失败:', e)
+      this.setData({ cartCount: 0, cartTotal: '0.00' })
+    }
   },
 
   // 切换分类
@@ -94,28 +99,32 @@ Page({
   // 加入购物车
   addToCart(e) {
     const product = e.currentTarget.dataset.item
-    const cart = wx.getStorageSync('cart') || []
+    try {
+      const cart = wx.getStorageSync('cart') || []
 
-    // 查找是否已存在
-    const existIndex = cart.findIndex(item => item.id === product.id)
+      const existIndex = cart.findIndex(item => item.id === product.id)
 
-    if (existIndex > -1) {
-      cart[existIndex].quantity += 1
-    } else {
-      cart.push({
-        ...product,
-        quantity: 1,
-        selected: true
+      if (existIndex > -1) {
+        cart[existIndex].quantity += 1
+      } else {
+        cart.push({
+          ...product,
+          quantity: 1,
+          selected: true
+        })
+      }
+
+      wx.setStorageSync('cart', cart)
+      this.updateCartInfo()
+
+      wx.showToast({
+        title: '已加入购物车',
+        icon: 'success'
       })
+    } catch (err) {
+      console.error('加入购物车失败:', err)
+      wx.showToast({ title: '加入失败', icon: 'none' })
     }
-
-    wx.setStorageSync('cart', cart)
-    this.updateCartInfo()
-
-    wx.showToast({
-      title: '已加入购物车',
-      icon: 'success'
-    })
   },
 
   // 去购物车
@@ -125,16 +134,21 @@ Page({
 
   // 去结算
   goCheckout() {
-    const cart = wx.getStorageSync('cart') || []
-    const selectedItems = cart.filter(item => item.selected)
+    try {
+      const cart = wx.getStorageSync('cart') || []
+      const selectedItems = cart.filter(item => item.selected)
 
-    if (selectedItems.length === 0) {
-      wx.showToast({ title: '请选择商品', icon: 'none' })
-      return
+      if (selectedItems.length === 0) {
+        wx.showToast({ title: '请选择商品', icon: 'none' })
+        return
+      }
+
+      wx.setStorageSync('orderItems', selectedItems)
+      wx.navigateTo({ url: '/pages/order-confirm/order-confirm' })
+    } catch (err) {
+      console.error('结算失败:', err)
+      wx.showToast({ title: '操作失败', icon: 'none' })
     }
-
-    wx.setStorageSync('orderItems', selectedItems)
-    wx.navigateTo({ url: '/pages/order-confirm/order-confirm' })
   },
 
   // 去咨询（保留原功能）

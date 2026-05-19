@@ -22,19 +22,23 @@ Page({
   },
 
   onShow() {
-    applyLang(this)
-    this.updateBanners()
+    const lang = getLang()
+    if (this.data.lang !== lang) {
+      applyLang(this)
+      this.updateBanners()
+    }
     this.filterServices()
   },
 
   updateBanners() {
     const lang = getLang()
     const imagePath = `/images/${lang}/`
+    const timestamp = Date.now()
     this.setData({
       banners: [
-        { id: 1, image: imagePath + 'banner1.png', title: '2060+', subtitle: '全国服务门店为你服务' },
-        { id: 2, image: imagePath + 'banner2.png', title: '专业团队', subtitle: '一对一专属顾问服务' },
-        { id: 3, image: imagePath + 'banner3.png', title: '品质保障', subtitle: '全程跟踪直至完成' }
+        { id: 1, image: imagePath + 'banner1.png?v=' + timestamp },
+        { id: 2, image: imagePath + 'banner2.png?v=' + timestamp },
+        { id: 3, image: imagePath + 'banner3.png?v=' + timestamp }
       ]
     })
   },
@@ -59,7 +63,11 @@ Page({
   },
 
   changeLang(e) {
-    changeLang(this, e.currentTarget.dataset.lang)
+    const newLang = e.currentTarget.dataset.lang
+    changeLang(this, newLang)
+    setTimeout(() => {
+      this.updateBanners()
+    }, 100)
   },
 
   goQuery() {

@@ -68,6 +68,9 @@ module.exports = {
   categories:['بارلىعى','تاۋار ماركاسى','كومپانيا','سىيفىرلىق','پاتەنت','كۋرس قۇرال'],
   total:'جەمەسى',
   checkout:'اڭدامالۋ',
+  cartEmpty:'سەبتە بوس',
+  goShop:'سېتىپ الۋ',
+  selectAll:'بارلىعى танداۋ',
   products:[
     {id:1,name:'تاۋار ماركاسىن تىزىمدەۋ پاكەتى',slogan:'[ماركا قورعايىنىڭ بىرىنشى тандаۋى]',spec:'تەكسەرۋ + سانات + جىبەرۋ',image:'/images/kkArab/banner1.png',badge:'قىزۋ',promo:'شەگەرمەلى اقشا تازارتۋ 200 يۋان',price:'1280',originalPrice:'1480',tags:['ءۇش تىل','كەڭەسشى اتقارادى'],category:1},
     {id:2,name:'تاۋار ماركاسىن ديزاين قىزمەتى',slogan:'[قازاق مادەنيەتىمەن ۇيلەسۋ]',spec:'اتاۋ + Logo ديزاين',image:'/images/kkArab/banner2.png',badge:'جاڭا',promo:'',price:'2680',originalPrice:'',tags:['تولىق ديزاين','ءۇش تىل'],category:1},

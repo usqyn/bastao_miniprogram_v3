@@ -25,10 +25,25 @@ Page({
   },
 
   // 加载购物车数据
-  loadCart() {
-    const cart = wx.getStorageSync('cart') || []
-    this.setData({ cartItems: cart })
-    this.calculateTotal()
+loadCart() {
+    try {
+      const cart = wx.getStorageSync('cart') || []
+      this.setData({ cartItems: cart })
+      this.calculateTotal()
+    } catch (e) {
+      console.error('加载购物车失败:', e)
+      this.setData({ cartItems: [], selectedCount: 0, totalPrice: 0 })
+    }
+  },
+
+  saveCart() {
+    try {
+      wx.setStorageSync('cart', this.data.cartItems)
+      this.calculateTotal()
+    } catch (e) {
+      console.error('保存购物车失败:', e)
+      wx.showToast({ title: '保存失败', icon: 'none' })
+    }
   },
 
   // 保存购物车数据
@@ -138,8 +153,13 @@ Page({
       return
     }
 
-    const selectedItems = this.data.cartItems.filter(item => item.selected)
-    wx.setStorageSync('orderItems', selectedItems)
-    wx.navigateTo({ url: '/pages/order-confirm/order-confirm' })
+    try {
+      const selectedItems = this.data.cartItems.filter(item => item.selected)
+      wx.setStorageSync('orderItems', selectedItems)
+      wx.navigateTo({ url: '/pages/order-confirm/order-confirm' })
+    } catch (e) {
+      console.error('结算失败:', e)
+      wx.showToast({ title: '操作失败', icon: 'none' })
+    }
   }
 })

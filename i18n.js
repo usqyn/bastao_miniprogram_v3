@@ -9,9 +9,7 @@ function getLang(){ return wx.getStorageSync('lang') || 'zh' }
 function applyLang(page){
   const lang = getLang()
   const t = dict[lang]
-  page.setData({ lang, t, rtl:lang==='kkArab', filteredProducts: t.products || [] })
-  wx.setStorageSync('appLang', lang)
-  page.setData({ appLang:lang })
+  page.setData({ lang, t, rtl:lang==='kkArab', appLang: lang })
   setTabs(lang)
 }
 

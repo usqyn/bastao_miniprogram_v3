@@ -24,10 +24,24 @@ Page({
   },
 
   // 加载订单商品
-  loadOrderItems() {
-    const orderItems = wx.getStorageSync('orderItems') || []
-    this.setData({ orderItems })
-    this.calculateTotal()
+loadOrderItems() {
+    try {
+      const orderItems = wx.getStorageSync('orderItems') || []
+      this.setData({ orderItems })
+      this.calculateTotal()
+    } catch (e) {
+      console.error('加载订单商品失败:', e)
+      this.setData({ orderItems: [] })
+    }
+  },
+
+  loadAddress() {
+    try {
+      const address = wx.getStorageSync('defaultAddress')
+      this.setData({ address })
+    } catch (e) {
+      console.error('加载地址失败:', e)
+    }
   },
 
   // 加载地址
@@ -96,44 +110,42 @@ Page({
       return
     }
 
-    // 显示加载中
-    wx.showLoading({ title: '提交中...' })
+    try {
+      wx.showLoading({ title: '提交中...' })
 
-    // 生成订单号
-    const orderNo = 'BT' + Date.now() + Math.random().toString(36).substr(2, 4).toUpperCase()
+      const orderNo = 'BT' + Date.now() + Math.random().toString(36).substr(2, 4).toUpperCase()
 
-    // 构建订单数据
-    const order = {
-      orderNo,
-      items: orderItems,
-      address,
-      remark,
-      totalAmount: orderTotal,
-      status: 'pending',
-      createTime: new Date().toISOString()
-    }
+      const order = {
+        orderNo,
+        items: orderItems,
+        address,
+        remark,
+        totalAmount: orderTotal,
+        status: 'pending',
+        createTime: new Date().toISOString()
+      }
 
-    // 保存订单到本地（模拟）
-    const orders = wx.getStorageSync('orders') || []
-    orders.unshift(order)
-    wx.setStorageSync('orders', orders)
+      const orders = wx.getStorageSync('orders') || []
+      orders.unshift(order)
+      wx.setStorageSync('orders', orders)
 
-    // 清空购物车中已结算的商品
-    const cart = wx.getStorageSync('cart') || []
-    const newItemIds = orderItems.map(item => item.id)
-    const newCart = cart.filter(item => !newItemIds.includes(item.id))
-    wx.setStorageSync('cart', newCart)
+      const cart = wx.getStorageSync('cart') || []
+      const newItemIds = orderItems.map(item => item.id)
+      const newCart = cart.filter(item => !newItemIds.includes(item.id))
+      wx.setStorageSync('cart', newCart)
 
-    // 清除临时订单数据
-    wx.removeStorageSync('orderItems')
+      wx.removeStorageSync('orderItems')
 
-    setTimeout(() => {
+      setTimeout(() => {
+        wx.hideLoading()
+        wx.redirectTo({
+          url: `/pages/pay-result/pay-result?orderNo=${orderNo}&amount=${orderTotal}&status=success`
+        })
+      }, 1000)
+    } catch (e) {
       wx.hideLoading()
-      
-      // 跳转到支付页面（模拟支付）
-      wx.redirectTo({
-        url: `/pages/pay-result/pay-result?orderNo=${orderNo}&amount=${orderTotal}&status=success`
-      })
-    }, 1000)
+      console.error('提交订单失败:', e)
+      wx.showToast({ title: '提交失败', icon: 'none' })
+    }
   }
 })
