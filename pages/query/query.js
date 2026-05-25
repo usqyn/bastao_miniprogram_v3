@@ -1,5 +1,7 @@
 const { applyLang, changeLang } = require('../../i18n.js')
+const share = require('../../utils/share.js')
 Page({
+  ...share,
   data:{ keyword:'', countryIndex:0, catIndex:0, country:'', category:'', lang:'zh', t:{}, rtl:false, loading:false },
   onLoad(){ applyLang(this); this.syncPickers() },
   onShow(){ applyLang(this); this.syncPickers(); const kw=wx.getStorageSync('pendingKeyword')||''; if(kw){ this.setData({keyword:kw}); wx.removeStorageSync('pendingKeyword') } },

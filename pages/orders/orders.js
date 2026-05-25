@@ -1,6 +1,8 @@
 const { applyLang, changeLang } = require('../../i18n.js')
+const share = require('../../utils/share.js')
 
 Page({
+  ...share,
   data: {
     lang: 'zh',
     t: {},

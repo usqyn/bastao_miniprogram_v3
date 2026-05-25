@@ -20,4 +20,3 @@
     <view>{{t.gain1}}</view><view>{{t.gain2}}</view><view>{{t.gain3}}</view>
   </view>
 </view>
-<tabbar current="2"></tabbar>

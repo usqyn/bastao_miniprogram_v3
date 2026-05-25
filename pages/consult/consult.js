@@ -1,5 +1,6 @@
 const { applyLang, changeLang } = require('../../i18n.js')
 const { LeadService } = require('../../services/supabase.js')
+const share = require('../../utils/share.js')
 
 const serviceToTypeMap = {
   0: 1, 1: 1,
@@ -10,6 +11,7 @@ const serviceToTypeMap = {
 }
 
 Page({
+  ...share,
   data: {
     name: '',
     phone: '',

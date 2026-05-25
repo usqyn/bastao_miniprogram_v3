@@ -37,8 +37,5 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "usingComponents": {
-    "tabbar": "/components/tabbar/tabbar",
-    "loading": "/components/loading/loading"
-  }
+  "usingComponents": {}
 }

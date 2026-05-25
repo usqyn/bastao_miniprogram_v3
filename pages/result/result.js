@@ -1,5 +1,7 @@
 const { applyLang, changeLang } = require('../../i18n.js')
+const share = require('../../utils/share.js')
 Page({
+  ...share,
   data:{ keyword:'', status:'unknown', title:'', icon:'⚠️', risk:'', advice:'', lang:'zh', t:{}, rtl:false },
   onLoad(q){ this._q=q||{}; this.applyResult() },
   onShow(){ this.applyResult() },
