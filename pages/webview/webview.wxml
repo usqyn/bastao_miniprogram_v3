@@ -1,4 +1,3 @@
-<view class="cases-container">
-  <view class="cases-title">案例</view>
-  <view class="cases-placeholder">尽情期待</view>
+<view class="container">
+  <web-view src="{{url}}"></web-view>
 </view>

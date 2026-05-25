@@ -34,6 +34,7 @@
   margin: 0 -20rpx;
   background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
   padding-bottom: 60rpx;
+  direction: ltr;
 }
 
 .banner-swiper {

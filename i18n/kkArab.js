@@ -1,4 +1,4 @@
-module.exports = {
+﻿module.exports = {
   tabs:['باس بەكەت','مىسالدار',' ماركا تەكسەرۋ','قىزمەت','جوسپار الۋ'],
   switchOk:'تىل اۋىستى',
    emptyKeyword:'ماركا اتىن ەنگىزىڭىز',
@@ -18,11 +18,11 @@ module.exports = {
   countries:'مەملىكەت قامتىمى',
   servicesTitle:'نەگىزگى قىزمەتتەر',
   whyTitle:'نەلكتىەن باستاۋدى تالداۋ كەرەك ؟',
-  quickEntryTitle1:'ماركا تىزىمدەۋ',
+  quickEntryTitle1:'ماركا ديزاين',
   quickEntryDesc1:'كەڭەسشى اتقارادى',
  quickEntryTitle2:'توراپ جاساۋ',
   quickEntryDesc2:'تور سايت جاساۋ',
-  quickEntryTitle3:'پاتەنت',
+  quickEntryTitle3:'پاتەنت ديزاين',
   quickEntryDesc3:'پاتەنت وتىنىشى',
   why1:'✓ ءۇش تىلدى قىزمەت: قانزۋشا / قازاقشا تىلدە / ورىسشا ',
   why2:'✓   كاسىپكەرلەرىن جاقسى تۇسىنەمىز',
@@ -72,7 +72,6 @@ module.exports = {
   goShop:'سېتىپ الۋ',
   selectAll:'بارلىعى танداۋ',
   products:[
-    {id:1,name:'تاۋار ماركاسىن تىزىمدەۋ پاكەتى',slogan:'[ماركا قورعايىنىڭ بىرىنشى тандаۋى]',spec:'تەكسەرۋ + سانات + جىبەرۋ',image:'/images/kkArab/banner1.png',badge:'قىزۋ',promo:'شەگەرمەلى اقشا تازارتۋ 200 يۋان',price:'1280',originalPrice:'1480',tags:['ءۇش تىل','كەڭەسشى اتقارادى'],category:1},
     {id:2,name:'تاۋار ماركاسىن ديزاين قىزمەتى',slogan:'[قازاق مادەنيەتىمەن ۇيلەسۋ]',spec:'اتاۋ + Logo ديزاين',image:'/images/kkArab/banner2.png',badge:'جاڭا',promo:'',price:'2680',originalPrice:'',tags:['تولىق ديزاين','ءۇش تىل'],category:1},
     {id:3,name:'جۇڭگودا كومپانيا تىزىمدەۋ',slogan:'[بىر تۇتاس اتقارۋ]',spec:'كىسىپتىك كۋازە + سالاقتىق تىزىم + بانكە شوت',image:'/images/kkArab/banner3.png',badge:'',promo:'1 ساتىپ 3 الۋ 3 ايلىق ەسەپ جازۋ سىڭىز',price:'3980',originalPrice:'5680',tags:['تولىق اتقارۋ','اشىق باعا'],category:2},
     {id:4,name:'قازاقستاندا كومپانيا تىزىمدەۋ',slogan:'[شەتەل دانەكەر]',spec:'جۇڭگو-قازاق ەكى تىلدى قىزمەت',image:'/images/kkArab/banner1.png',badge:'ۇсыنىلادى',promo:'',price:'8800',originalPrice:'',tags:['ءۇش تىل','يەرلىك'],category:2},

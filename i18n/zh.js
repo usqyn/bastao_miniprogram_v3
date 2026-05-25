@@ -18,11 +18,11 @@ module.exports = {
   countries:'覆盖国家',
   servicesTitle:'核心服务',
   whyTitle:'为什么选择巴丝淘',
-  quickEntryTitle1:'商标申请',
+  quickEntryTitle1:'商标设计',
   quickEntryDesc1:'专业咨询',
   quickEntryTitle2:'小程序开发',
   quickEntryDesc2:'网站开发',
-  quickEntryTitle3:'专利申请',
+  quickEntryTitle3:'专利设计',
   quickEntryDesc3:'快速通道',
   why1:'✓ 三语言服务：中文 / 哈萨克阿拉伯文 / 西里尔文',
   why2:'✓ 懂新疆企业家的真实需求',
@@ -41,7 +41,7 @@ module.exports = {
   resultAdvice:'专业建议',
   consultReview:'免费预约顾问复核',
   courseTitle:'9.9元避坑课程',
-  courseSub:'《商标申请失败的3个原因》适合想自己先了解流程的客户。',
+  courseSub:'《协助商标申请失败的3个原因》适合想自己先了解流程的客户。',
   learnNow:'立即学习',
   resultMap:{
     available:{title:'初步可注册',risk:'通过率预估：80%',advice:'该名称暂未发现明显冲突，建议尽快锁定类别并提交注册申请。'},
@@ -62,27 +62,14 @@ module.exports = {
   qrcode:'/images/qrcode.png',
   qrcodeText:'扫码关注公众号',
   emailText:'邮箱：service@bastao.cn',
-  types:['公司注册','商标申请','专利申请','网站开发','小程序开发','课程/软件服务','其他'],
+  types:['公司注册','协助商标申请','专利申请','网站开发','小程序开发','课程/软件服务','其他'],
 
   // ===== 商城数据 =====
   mallTitle: '巴丝淘商城',
   mallSubtitle: '专业服务 · 透明报价 · 品质保障',
   categories: ['全部', '商标服务', '公司注册', '数字化', '专利服务', '课程工具'],
   products: [
-    {
-      id: 1,
-      name: '商标申请套餐',
-      slogan: '【品牌保护首选】',
-      spec: '含查询+分类+递交全流程',
-      image: '/images/zh/banner1.png',
-      badge: 'HOT',
-      promo: '限时优惠 立减¥200',
-      price: '1280',
-      originalPrice: '1480',
-      tags: ['三语言', '顾问代办'],
-      category: 1
-    },
-    {
+{
       id: 2,
       name: '商标设计服务',
       slogan: '【融合哈萨克文化】',
@@ -219,7 +206,7 @@ module.exports = {
   tag3:'透明报价',
   quote:'咨询报价',
   serviceList:[
-    {icon:'®️',name:'商标申请',desc:'查询、分类、递交、进度跟进、驳回复核建议',category:'trademark'},
+    {icon:'®️',name:'协助商标申请',desc:'查询、分类、递交、进度跟进、驳回复核建议',category:'trademark'},
     {icon:'🎨',name:'商标设计',desc:'融合哈萨克文化的品牌命名与Logo设计',category:'trademark'},
     {icon:'🌐',name:'网站开发',desc:'多语言官网、企业展示站',category:'other'},
     {icon:'📱',name:'小程序开发',desc:'微信小程序、商城、表单获客、后台管理',category:'other'},

@@ -10,7 +10,7 @@
   <!-- 顶部轮播区域 -->
   <view class="banner-section">
     <!-- 轮播图 -->
-    <swiper class="banner-swiper" indicator-dots autoplay circular indicator-active-color="#fff" indicator-color="rgba(255,255,255,0.5)">
+    <swiper class="banner-swiper" indicator-dots autoplay circular indicator-active-color="#fff" indicator-color="rgba(255,255,255,0.5)" indicator-style="justify-content:center;direction:ltr">
       <swiper-item wx:for="{{banners}}" wx:key="id">
         <view class="banner-item">
           <image src="{{item.image}}" mode="aspectFill" class="banner-bg"/>
