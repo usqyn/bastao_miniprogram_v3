@@ -1,5 +1,5 @@
 module.exports = {
-  tabs:['首页','官网','商标查询','商城','获取方案'],
+  tabs:['首页','案例','商标查询','商城','获取方案'],
   switchOk:'已切换语言',
   emptyKeyword:'请输入商标名称',
   submitOk:'提交成功',
