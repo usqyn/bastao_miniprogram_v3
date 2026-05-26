@@ -3,11 +3,12 @@ const { LeadService } = require('../../services/supabase.js')
 const share = require('../../utils/share.js')
 
 const serviceToTypeMap = {
-  0: 1, 1: 1,
-  2: 3, 3: 4,
-  4: 2, 5: 2,
-  6: 5,
-  7: 0
+  0: 4,
+  1: 1,
+  2: 2,
+  3: 4,
+  4: 3,
+  5: 0
 }
 
 Page({
