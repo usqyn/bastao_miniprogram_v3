@@ -1,6 +1,10 @@
 App({
   globalData:{ lang:'zh', isAdmin: false, adminPhone: '' },
   onLaunch(){
+    // Supabase 心跳保活
+    const { heartbeat } = require('./services/supabase.js')
+    heartbeat()
+
     wx.cloud.init({ env: 'bastao-prod-xxx' })
     const lang = wx.getStorageSync('lang') || 'zh'
     this.globalData.lang = lang

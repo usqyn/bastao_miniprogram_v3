@@ -48,10 +48,14 @@ loadCart() {
     }
   },
 
-  // 保存购物车数据
   saveCart() {
-    wx.setStorageSync('cart', this.data.cartItems)
-    this.calculateTotal()
+    try {
+      wx.setStorageSync('cart', this.data.cartItems)
+      this.calculateTotal()
+    } catch (e) {
+      console.error('保存购物车失败:', e)
+      wx.showToast({ title: '保存失败', icon: 'none' })
+    }
   },
 
   // 计算总价

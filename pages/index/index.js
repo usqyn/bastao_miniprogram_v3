@@ -35,12 +35,11 @@ Page({
   updateBanners() {
     const lang = getLang()
     const imagePath = `/images/${lang}/`
-    const timestamp = Date.now()
     this.setData({
       banners: [
-        { id: 1, image: imagePath + 'banner1.png?v=' + timestamp },
-        { id: 2, image: imagePath + 'banner2.png?v=' + timestamp },
-        { id: 3, image: imagePath + 'banner3.png?v=' + timestamp }
+        { id: 1, image: imagePath + 'banner1.png' },
+        { id: 2, image: imagePath + 'banner2.png' },
+        { id: 3, image: imagePath + 'banner3.png' }
       ]
     })
   },

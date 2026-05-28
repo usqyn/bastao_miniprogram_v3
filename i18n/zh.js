@@ -24,7 +24,7 @@ module.exports = {
   quickEntryDesc2:'网站开发',
   quickEntryTitle3:'专利设计',
   quickEntryDesc3:'快速通道',
-  why1:'✓ 三语言服务：中文 / 哈萨克阿拉伯文 / 西里尔文',
+  why1:'✓ 三语言服务：中文，哈萨克语，俄语',
   why2:'✓ 懂新疆企业家的真实需求',
   why3:'✓ 从品牌保护到数字化建设一站式交付',
   queryTitle:'免费商标查询',
@@ -61,7 +61,7 @@ module.exports = {
   wechatText:'微信：请替换为你的微信',
   qrcode:'/images/qrcode.png',
   qrcodeText:'扫码关注公众号',
-  emailText:'邮箱：service@bastao.cn',
+  emailText:'邮箱：sak202509@163.com',
   types:['公司注册','网站开发','小程序开发','课程/软件服务','其他'],
 
   // ===== 商城数据 =====
@@ -207,10 +207,10 @@ module.exports = {
   quote:'咨询报价',
   serviceList:[
     {icon:'🎨',name:'商标设计',desc:'融合哈萨克文化的品牌命名与Logo设计',category:'trademark'},
-    {icon:'🌐',name:'网站开发',desc:'多语言官网、企业展示站',category:'other'},
-    {icon:'📱',name:'小程序开发',desc:'微信小程序、商城、表单获客、后台管理',category:'other'},
     {icon:'💡',name:'专利设计',desc:'产品方案与图纸优化',category:'patent'},
-    {icon:'🎓',name:'课程与软件服务',desc:'商标避坑课程、工具模板、数字化服务',category:'other'},
+    {icon:'📱',name:'小程序开发',desc:'微信小程序、商城、表单获客、后台管理',category:'other'},
+    {icon:'🌐',name:'网站开发',desc:'多语言官网、企业展示站',category:'other'},
+    {icon:'🎓',name:'包装设计',desc:'产品包装设计与品牌视觉升级',category:'other'},
     {icon:'🏢',name:'公司注册',desc:'中国、哈萨克斯坦、香港、美国等公司注册方案',category:'company'}
   ]
 }

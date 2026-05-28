@@ -26,6 +26,18 @@ function request(url, method = 'GET', data = null) {
   })
 }
 
+// Supabase 心跳保活（防止免费版项目被暂停）
+async function heartbeat() {
+  try {
+    await request('/customers?select=id&limit=1', 'GET')
+    console.log('[Supabase Heartbeat] OK')
+    return true
+  } catch (e) {
+    console.warn('[Supabase Heartbeat] 失败:', e.message)
+    return false
+  }
+}
+
 // 客户线索服务
 const LeadService = {
   // 创建线索
@@ -82,5 +94,6 @@ const LeadService = {
 }
 
 module.exports = {
-  LeadService
+  LeadService,
+  heartbeat
 }

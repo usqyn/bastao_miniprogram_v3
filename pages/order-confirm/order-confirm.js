@@ -46,12 +46,6 @@ loadOrderItems() {
     }
   },
 
-  // 加载地址
-  loadAddress() {
-    const address = wx.getStorageSync('defaultAddress')
-    this.setData({ address })
-  },
-
   // 计算总价
   calculateTotal() {
     let goodsTotal = 0
