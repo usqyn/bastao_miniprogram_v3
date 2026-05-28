@@ -10,7 +10,9 @@ Page({
     activeCategory: 0,
     filteredProducts: [],
     cartCount: 0,
-    cartTotal: '0.00'
+    cartTotal: '0.00',
+    showDetail: false,
+    detailProduct: null
   },
 
   onLoad() {
@@ -84,18 +86,36 @@ Page({
   },
 
   // 查看商品详情
-  viewProduct(e) {
+  viewDetail(e) {
     const item = e.currentTarget.dataset.item
-    wx.showModal({
-      title: item.name,
-      content: `${item.slogan || ''}\n价格: ¥${item.price}\n${item.spec || ''}`,
-      confirmText: '加入购物车',
-      success: (res) => {
-        if (res.confirm) {
-          this.addToCart({ currentTarget: { dataset: { item } } })
-        }
-      }
-    })
+    this.setData({ showDetail: true, detailProduct: item })
+  },
+
+  // 关闭详情弹窗
+  closeDetail() {
+    this.setData({ showDetail: false, detailProduct: null })
+  },
+
+  // 从详情加入购物车
+  detailAddToCart() {
+    const product = this.data.detailProduct
+    if (!product) return
+    this.addToCart({ currentTarget: { dataset: { item: product } } })
+  },
+
+  // 立即购买
+  buyNow() {
+    const product = this.data.detailProduct
+    if (!product) return
+
+    this.addToCart({ currentTarget: { dataset: { item: product } } })
+
+    setTimeout(() => {
+      const cart = wx.getStorageSync('cart') || []
+      const selectedItems = cart.filter(item => item.selected)
+      wx.setStorageSync('orderItems', selectedItems)
+      wx.navigateTo({ url: '/pages/order-confirm/order-confirm' })
+    }, 300)
   },
 
   // 加入购物车
@@ -152,6 +172,8 @@ Page({
       wx.showToast({ title: '操作失败', icon: 'none' })
     }
   },
+
+  noop() {},
 
   // 去咨询（保留原功能）
   goConsult(e) {

@@ -1,4 +1,4 @@
-const { AdminService } = require('../../services/supabase.js')
+const { AdminService, OrderService, ProductService } = require('../../services/supabase.js')
 
 Page({
   data: {
@@ -18,12 +18,10 @@ Page({
   },
 
   onLoad() {
-    // 检查登录状态
     if (!AdminService.checkLogin()) {
       wx.redirectTo({ url: '/pages/admin/admin' })
       return
     }
-
     this.setCurrentDate()
     this.loadStats()
   },
@@ -34,63 +32,57 @@ Page({
 
   setCurrentDate() {
     const now = new Date()
-    const dateStr = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`
-    this.setData({ currentDate: dateStr })
+    this.setData({ currentDate: `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日` })
   },
 
-  // 加载统计数据
-  loadStats() {
-    // 从本地存储获取订单数据
-    const orders = wx.getStorageSync('orders') || []
-    
-    // 计算总收入
-    const totalRevenue = orders.reduce((sum, order) => {
-      return sum + parseFloat(order.totalAmount || 0)
-    }, 0)
+  async loadStats() {
+    try {
+      const [orders, products] = await Promise.all([
+        OrderService.list(),
+        ProductService.list()
+      ])
 
-    // 计算待处理订单
-    const pendingOrders = orders.filter(o => o.status === 'pending').length
+      const ordersList = orders || []
 
-    // 今日统计
-    const today = new Date().toDateString()
-    const todayOrders = orders.filter(o => {
-      const orderDate = new Date(o.createTime).toDateString()
-      return orderDate === today
-    })
-    const todayRevenue = todayOrders.reduce((sum, o) => sum + parseFloat(o.totalAmount || 0), 0)
+      const totalRevenue = ordersList.reduce((sum, order) => sum + parseFloat(order.totalAmount || 0), 0)
+      const pendingOrders = ordersList.filter(o => o.status === 'pending').length
 
-    // 最近订单
-    const recentOrders = orders.slice(0, 5).map(order => {
-      const statusTexts = {
-        'pending': '待付款',
-        'paid': '已付款',
-        'shipped': '已发货',
-        'completed': '已完成'
-      }
-      return {
+      const today = new Date().toDateString()
+      const todayOrders = ordersList.filter(o => {
+        const orderDate = new Date(o.createTime || o.created_at).toDateString()
+        return orderDate === today
+      })
+      const todayRevenue = todayOrders.reduce((sum, o) => sum + parseFloat(o.totalAmount || 0), 0)
+
+      const statusTexts = { 'pending': '待付款', 'paid': '已付款', 'shipped': '已发货', 'completed': '已完成' }
+      const recentOrders = ordersList.slice(0, 5).map(order => ({
         ...order,
         statusText: statusTexts[order.status] || order.status,
-        createTime: this.formatTime(order.createTime)
-      }
-    })
+        createTime: this.formatTime(order.createTime || order.created_at)
+      }))
 
-    this.setData({
-      stats: {
-        totalRevenue: totalRevenue.toFixed(2),
-        totalOrders: orders.length,
-        totalProducts: 8,
-        pendingOrders
-      },
-      todayStats: {
-        orders: todayOrders.length,
-        revenue: todayRevenue.toFixed(2),
-        views: Math.floor(Math.random() * 100) + 50 // 模拟访问数据
-      },
-      recentOrders
-    })
+      this.setData({
+        stats: {
+          totalRevenue: totalRevenue.toFixed(2),
+          totalOrders: ordersList.length,
+          totalProducts: (products || []).length || 8,
+          pendingOrders
+        },
+        todayStats: {
+          orders: todayOrders.length,
+          revenue: todayRevenue.toFixed(2),
+          views: Math.floor(Math.random() * 100) + 50
+        },
+        recentOrders
+      })
+    } catch (e) {
+      console.error('加载统计失败:', e)
+      wx.showToast({ title: '数据加载失败', icon: 'none' })
+    }
   },
 
   formatTime(isoString) {
+    if (!isoString) return '—'
     const date = new Date(isoString)
     return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`
   },

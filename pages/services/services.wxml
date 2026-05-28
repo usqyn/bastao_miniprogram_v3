@@ -46,7 +46,7 @@
     <block wx:for="{{filteredProducts}}" wx:key="id">
       <view class="product-card">
         <!-- 商品图片区 -->
-        <view class="product-img-wrap" bindtap="viewProduct" data-item="{{item}}">
+        <view class="product-img-wrap" bindtap="viewDetail" data-item="{{item}}">
           <image class="product-img" src="{{item.image}}" mode="aspectFill" />
           <!-- 角标 -->
           <view class="product-badge" wx:if="{{item.badge}}">{{item.badge}}</view>
@@ -95,6 +95,35 @@
       </view>
     </view>
     <view class="footer-checkout" bindtap="goCheckout">{{t.checkout}}</view>
+  </view>
+
+  <!-- 商品详情弹窗 -->
+  <view class="modal-overlay" wx:if="{{showDetail}}" bindtap="closeDetail">
+    <view class="detail-modal" catchtap="noop">
+      <view class="detail-close" bindtap="closeDetail">✕</view>
+      <image class="detail-img" src="{{detailProduct.image}}" mode="aspectFill" />
+      <view class="detail-body">
+        <view class="detail-badge" wx:if="{{detailProduct.badge}}">{{detailProduct.badge}}</view>
+        <view class="detail-name">{{detailProduct.name}}</view>
+        <view class="detail-slogan" wx:if="{{detailProduct.slogan}}">{{detailProduct.slogan}}</view>
+        <view class="detail-spec" wx:if="{{detailProduct.spec}}">{{detailProduct.spec}}</view>
+        <view class="detail-tags" wx:if="{{detailProduct.tags}}">
+          <text class="detail-tag" wx:for="{{detailProduct.tags}}" wx:key="*this">{{item}}</text>
+        </view>
+        <view class="detail-desc" wx:if="{{detailProduct.detail}}">{{detailProduct.detail}}</view>
+        <view class="detail-price-row">
+          <view class="detail-price">
+            <text class="price-symbol">¥</text>
+            <text class="price-num">{{detailProduct.price}}</text>
+            <text class="price-original" wx:if="{{detailProduct.originalPrice}}">¥{{detailProduct.originalPrice}}</text>
+          </view>
+        </view>
+        <view class="detail-actions">
+          <view class="detail-btn cart" bindtap="detailAddToCart">加入购物车</view>
+          <view class="detail-btn buy" bindtap="buyNow">立即购买</view>
+        </view>
+      </view>
+    </view>
   </view>
 
 </view>

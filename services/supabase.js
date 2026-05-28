@@ -198,8 +198,111 @@ const LeadService = {
   }
 }
 
+// ===== 本地存储降级：商品管理 =====
+const LocalProductService = {
+  getAll() { return wx.getStorageSync('products') || [] },
+  saveAll(list) { wx.setStorageSync('products', list) },
+
+  async list() { return this.getAll() },
+  async create(product) {
+    const list = this.getAll()
+    const id = list.length > 0 ? Math.max(...list.map(p => p.id)) + 1 : 1
+    product.id = id
+    list.push(product)
+    this.saveAll(list)
+    return product
+  },
+  async update(id, data) {
+    const list = this.getAll()
+    const idx = list.findIndex(p => p.id === id)
+    if (idx > -1) { list[idx] = { ...list[idx], ...data }; this.saveAll(list) }
+  },
+  async delete(id) {
+    this.saveAll(this.getAll().filter(p => p.id !== id))
+  }
+}
+
+// ===== 带自动降级的商品服务 =====
+const ProductService = {
+  async _withFallback(supabaseFn, localFn) {
+    try { return await supabaseFn() } catch { console.warn('[ProductService] 降级本地'); return localFn() }
+  },
+
+  async list() {
+    return this._withFallback(
+      () => request('/products?select=*&order=id.asc'),
+      () => LocalProductService.list()
+    )
+  },
+  async create(product) {
+    return this._withFallback(
+      () => request('/products', 'POST', { ...product, created_at: new Date().toISOString() }),
+      () => LocalProductService.create(product)
+    )
+  },
+  async update(id, data) {
+    return this._withFallback(
+      () => request(`/products?id=eq.${id}`, 'PATCH', { ...data, updated_at: new Date().toISOString() }),
+      () => LocalProductService.update(id, data)
+    )
+  },
+  async delete(id) {
+    return this._withFallback(
+      () => request(`/products?id=eq.${id}`, 'DELETE'),
+      () => LocalProductService.delete(id)
+    )
+  }
+}
+
+// ===== 本地存储降级：订单管理 =====
+const LocalOrderService = {
+  getAll() { return wx.getStorageSync('orders') || [] },
+  saveAll(list) { wx.setStorageSync('orders', list) },
+
+  async list() { return this.getAll() },
+  async create(order) {
+    const list = this.getAll()
+    list.unshift(order)
+    this.saveAll(list)
+    return order
+  },
+  async updateStatus(orderNo, status) {
+    const list = this.getAll()
+    const idx = list.findIndex(o => o.orderNo === orderNo)
+    if (idx > -1) { list[idx].status = status; list[idx].updated_at = new Date().toISOString(); this.saveAll(list) }
+  }
+}
+
+// ===== 带自动降级的订单服务 =====
+const OrderService = {
+  async _withFallback(supabaseFn, localFn) {
+    try { return await supabaseFn() } catch { console.warn('[OrderService] 降级本地'); return localFn() }
+  },
+
+  async list() {
+    return this._withFallback(
+      () => request('/orders?select=*&order=created_at.desc'),
+      () => LocalOrderService.list()
+    )
+  },
+  async create(order) {
+    return this._withFallback(
+      () => request('/orders', 'POST', { ...order, created_at: new Date().toISOString() }),
+      () => LocalOrderService.create(order)
+    )
+  },
+  async updateStatus(orderNo, status) {
+    return this._withFallback(
+      () => request(`/orders?orderNo=eq.${orderNo}`, 'PATCH', { status, updated_at: new Date().toISOString() }),
+      () => LocalOrderService.updateStatus(orderNo, status)
+    )
+  }
+}
+
 module.exports = {
   LeadService,
   AdminService,
+  ProductService,
+  OrderService,
   heartbeat
 }

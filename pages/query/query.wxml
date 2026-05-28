@@ -4,7 +4,7 @@
   <view class="lang-pill {{lang==='kkCyrl'?'active':''}}" data-lang="kkCyrl" bindtap="changeLang">Қазақша</view>
 </view>
 <view class="container {{rtl?'rtl':''}}">
-  <view class="query-head card">
+  <view class="query-head card" bindlongpress="goAdmin">
     <view class="kazakh-line"></view>
     <view class="title">{{t.queryTitle}}</view>
     <view class="muted">{{t.querySub}}</view>

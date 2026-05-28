@@ -1,5 +1,6 @@
 const { applyLang } = require('../../i18n.js')
 const share = require('../../utils/share.js')
+const { OrderService } = require('../../services/supabase.js')
 
 Page({
   ...share,
@@ -25,8 +26,7 @@ Page({
     applyLang(this)
   },
 
-  // 加载订单商品
-loadOrderItems() {
+  loadOrderItems() {
     try {
       const orderItems = wx.getStorageSync('orderItems') || []
       this.setData({ orderItems })
@@ -46,24 +46,16 @@ loadOrderItems() {
     }
   },
 
-  // 计算总价
   calculateTotal() {
     let goodsTotal = 0
     this.data.orderItems.forEach(item => {
       goodsTotal += parseFloat(item.price) * item.quantity
     })
-    
     const freight = goodsTotal >= 99 ? 0 : 10
     const orderTotal = goodsTotal + freight - this.data.discount
-
-    this.setData({
-      goodsTotal: goodsTotal.toFixed(2),
-      freight,
-      orderTotal: orderTotal.toFixed(2)
-    })
+    this.setData({ goodsTotal: goodsTotal.toFixed(2), freight, orderTotal: orderTotal.toFixed(2) })
   },
 
-  // 选择地址
   chooseAddress() {
     wx.chooseAddress({
       success: (res) => {
@@ -79,21 +71,16 @@ loadOrderItems() {
         wx.setStorageSync('defaultAddress', address)
       },
       fail: () => {
-        wx.showToast({
-          title: '请授权地址信息',
-          icon: 'none'
-        })
+        wx.showToast({ title: '请授权地址信息', icon: 'none' })
       }
     })
   },
 
-  // 输入备注
   onRemarkInput(e) {
     this.setData({ remark: e.detail.value })
   },
 
-  // 提交订单
-  submitOrder() {
+  async submitOrder() {
     const { orderItems, address, remark, orderTotal } = this.data
 
     if (!address) {
@@ -121,22 +108,16 @@ loadOrderItems() {
         createTime: new Date().toISOString()
       }
 
-      const orders = wx.getStorageSync('orders') || []
-      orders.unshift(order)
-      wx.setStorageSync('orders', orders)
+      await OrderService.create(order)
 
       const cart = wx.getStorageSync('cart') || []
       const newItemIds = orderItems.map(item => item.id)
-      const newCart = cart.filter(item => !newItemIds.includes(item.id))
-      wx.setStorageSync('cart', newCart)
-
+      wx.setStorageSync('cart', cart.filter(item => !newItemIds.includes(item.id)))
       wx.removeStorageSync('orderItems')
 
       setTimeout(() => {
         wx.hideLoading()
-        wx.redirectTo({
-          url: `/pages/pay-result/pay-result?orderNo=${orderNo}&amount=${orderTotal}&status=success`
-        })
+        wx.redirectTo({ url: `/pages/pay-result/pay-result?orderNo=${orderNo}&amount=${orderTotal}&status=success` })
       }, 1000)
     } catch (e) {
       wx.hideLoading()

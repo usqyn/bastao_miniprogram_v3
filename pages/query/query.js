@@ -10,6 +10,10 @@ Page({
   onKeyword(e){ this.setData({keyword:e.detail.value}) },
   onCountry(e){ this.setData({countryIndex:Number(e.detail.value)}); this.syncPickers() },
   onCat(e){ this.setData({catIndex:Number(e.detail.value)}); this.syncPickers() },
+  goAdmin(){
+    wx.navigateTo({ url: '/pages/admin/admin' })
+  },
+
   doQuery(){
     if(!this.data.keyword || !this.data.keyword.trim()){ 
       wx.showToast({title:this.data.t.emptyKeyword, icon:'none'}); 
