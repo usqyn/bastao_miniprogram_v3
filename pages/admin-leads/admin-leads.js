@@ -33,7 +33,17 @@ Page({
       { value: 'pending', label: '新线索' },
       { value: 'contacted', label: '已联系' },
       { value: 'closed', label: '已关闭' }
-    ]
+    ],
+
+    // 新增线索弹窗
+    showCreateModal: false,
+    createForm: {
+      name: '',
+      phone: '',
+      wechat: '',
+      type: '',
+      content: ''
+    }
   },
 
   onLoad() {
@@ -65,7 +75,7 @@ Page({
   },
 
   // 登录
-  handleLogin() {
+  async handleLogin() {
     const { username, password } = this.data
 
     if (!username || !password) {
@@ -75,18 +85,16 @@ Page({
 
     this.setData({ loading: true })
 
-    // 简单验证
-    setTimeout(() => {
-      if (username === 'admin' && password === '123456') {
-        wx.setStorageSync('admin_token', 'token_' + Date.now())
-        this.setData({ isLoggedIn: true, loading: false })
-        this.loadData()
-        wx.showToast({ title: '登录成功', icon: 'success' })
-      } else {
-        this.setData({ loading: false })
-        wx.showToast({ title: '账号或密码错误', icon: 'none' })
-      }
-    }, 500)
+    const { AdminService } = require('../../services/supabase.js')
+    try {
+      await AdminService.login(username, password)
+      this.setData({ isLoggedIn: true, loading: false })
+      this.loadData()
+      wx.showToast({ title: '登录成功', icon: 'success' })
+    } catch (e) {
+      this.setData({ loading: false })
+      wx.showToast({ title: e.message || '账号或密码错误', icon: 'none' })
+    }
   },
 
   // 退出登录
@@ -238,6 +246,8 @@ Page({
     })
   },
 
+  noop() {},
+
   // 格式化时间
   formatTime(isoString) {
     if (!isoString) return '—'
@@ -248,5 +258,43 @@ Page({
     const hour = String(d.getHours()).padStart(2, '0')
     const min = String(d.getMinutes()).padStart(2, '0')
     return `${year}-${month}-${day} ${hour}:${min}`
+  },
+
+  // 新增线索弹窗
+  showCreate() {
+    this.setData({
+      showCreateModal: true,
+      createForm: { name: '', phone: '', wechat: '', type: '', content: '' }
+    })
+  },
+
+  hideCreate() {
+    this.setData({ showCreateModal: false })
+  },
+
+  onCreateField(e) {
+    const field = e.currentTarget.dataset.field
+    this.setData({ [`createForm.${field}`]: e.detail.value })
+  },
+
+  async submitCreate() {
+    const { name, phone } = this.data.createForm
+    if (!name || !phone) {
+      wx.showToast({ title: '请填写姓名和电话', icon: 'none' })
+      return
+    }
+
+    this.setData({ loading: true })
+    try {
+      await LeadService.create(this.data.createForm)
+      wx.showToast({ title: '添加成功', icon: 'success' })
+      this.setData({ showCreateModal: false })
+      this.loadData()
+    } catch (err) {
+      console.error('添加失败:', err)
+      wx.showToast({ title: '添加失败', icon: 'none' })
+    } finally {
+      this.setData({ loading: false })
+    }
   }
 })

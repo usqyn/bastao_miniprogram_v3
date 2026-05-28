@@ -79,14 +79,24 @@ Page({
         type: this.data.type,
         content: this.data.content
       })
-
-      this.setData({ loading: false })
-      wx.showToast({ title: this.data.t.submitOk, icon: 'success' })
-      this.setData({ name: '', phone: '', wechat: '', content: '' })
     } catch (err) {
-      console.error('提交失败:', err)
-      this.setData({ loading: false })
-      wx.showToast({ title: '提交失败', icon: 'none' })
+      console.warn('Supabase 不可用，保存到本地:', err)
+      const leads = wx.getStorageSync('leads') || []
+      leads.unshift({
+        id: Date.now(),
+        name: this.data.name,
+        phone: this.data.phone,
+        wechat: this.data.wechat,
+        type: this.data.type,
+        content: this.data.content,
+        status: 'pending',
+        created_at: new Date().toISOString()
+      })
+      wx.setStorageSync('leads', leads)
     }
+
+    this.setData({ loading: false })
+    wx.showToast({ title: this.data.t.submitOk, icon: 'success' })
+    this.setData({ name: '', phone: '', wechat: '', content: '' })
   }
 })

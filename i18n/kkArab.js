@@ -18,11 +18,11 @@
   countries:'مەملىكەت قامتىمى',
   servicesTitle:'نەگىزگى قىزمەتتەر',
   whyTitle:'نەلكتىەن باستاۋدى تالداۋ كەرەك ؟',
-  quickEntryTitle1:'ماركا ديزاين',
+  quickEntryTitle1:'ماركا جوبالاۋ',
   quickEntryDesc1:'كەڭەسشى اتقارادى',
  quickEntryTitle2:'توراپ جاساۋ',
   quickEntryDesc2:'تور سايت جاساۋ',
-  quickEntryTitle3:'پاتەنت ديزاين',
+  quickEntryTitle3:'پاتەنت جوبالاۋ',
   quickEntryDesc3:'پاتەنت وتىنىشى',
   why1:'✓ ءۇش تىلدى قىزمەت: قانزۋشا، قازاقشا، ورىسشا',
   why2:'✓   كاسىپكەرلەرىن جاقسى تۇسىنەمىز',
@@ -72,12 +72,12 @@
   goShop:'سېتىپ الۋ',
   selectAll:'بارلىعى танداۋ',
   products:[
-    {id:2,name:'تاۋار ماركاسىن ديزاين قىزمەتى',slogan:'[قازاق مادەنيەتىمەن ۇيلەسۋ]',spec:'اتاۋ + Logo ديزاين',image:'/images/kkArab/banner2.png',badge:'جاڭا',promo:'',price:'2680',originalPrice:'',tags:['تولىق ديزاين','ءۇش تىل'],category:1},
+    {id:2,name:'تاۋار ماركاسىن جوبالاۋ قىزمەتى',slogan:'[قازاق مادەنيەتىمەن ۇيلەسۋ]',spec:'اتاۋ + Logo جوبالاۋ',image:'/images/kkArab/banner2.png',badge:'جاڭا',promo:'',price:'2680',originalPrice:'',tags:['تولىق جوبالاۋ','ءۇش تىل'],category:1},
     {id:3,name:'جۇڭگودا كومپانيا تىزىمدەۋ',slogan:'[بىر تۇتاس اتقارۋ]',spec:'كىسىپتىك كۋازە + سالاقتىق تىزىم + بانكە شوت',image:'/images/kkArab/banner3.png',badge:'',promo:'1 ساتىپ 3 الۋ 3 ايلىق ەسەپ جازۋ سىڭىز',price:'3980',originalPrice:'5680',tags:['تولىق اتقارۋ','اشىق باعا'],category:2},
     {id:4,name:'قازاقستاندا كومپانيا تىزىمدەۋ',slogan:'[شەتەل دانەكەر]',spec:'جۇڭگو-قازاق ەكى تىلدى قىزمەت',image:'/images/kkArab/banner1.png',badge:'ۇсыنىلادى',promo:'',price:'8800',originalPrice:'',tags:['ءۇش تىل','يەرلىك'],category:2},
     {id:5,name:'بىرلىك سايت جاساۋ',slogan:'[كۆپ تىلدە كورسەتىلى]',spec:'جۇڭگو/قازاق/ورىس ەكى تىلدى سايت',image:'/images/kkArab/banner2.png',badge:'',promo:'شەگەرمەلى SEO وڭدەۋ سىڭىز',price:'5980',originalPrice:'7980',tags:['ىقساۋ','ءۇش تىل'],category:3},
     {id:6,name:'WeChat شاعىن باعدارلاما جاساۋ',slogan:'[جۇتىۋ قۇرالداۋ]',spec:'دۇكەن/جاڭاۋ/ فورما جۇتىۋ',image:'/images/kkArab/banner3.png',badge:'بوم',promo:'1 ساتىپ 2 الۋ باشقارۋ پانەلەنى سىڭىز',price:'4980',originalPrice:'6980',tags:['دايىن جاساۋ','كەپىلەۋ'],category:3},
-    {id:7,name:'پاتەنت وتىنىشى',slogan:'[كەڭەسشى الاتقارۋ]',spec:'ىزدەۋ/پايدىلى نۇسقا/سىرتقى ديزاين',image:'/images/kkArab/banner1.png',badge:'',promo:'',price:'3800',originalPrice:'5000',tags:['تولىق باقىلاۋ','جوعارقى وتۋ'],category:4},
+    {id:7,name:'پاتەنت وتىنىشى',slogan:'[كەڭەسشى الاتقارۋ]',spec:'ىزدەۋ/پايدىلى نۇسقا/سىرتقى جوبالاۋ',image:'/images/kkArab/banner1.png',badge:'',promo:'',price:'3800',originalPrice:'5000',tags:['تولىق باقىلاۋ','جوعارقى وتۋ'],category:4},
     {id:8,name:'تاۋار ماركاسىن قاۋىپتەن ساقتانۋ كۋرسى',slogan:'[9.9 يۋان ساتىپ الۋ]',spec:'ۋيدېو كۋرس + قۇرال ۇلگى',image:'/images/kkArab/banner2.png',badge:'ارزانات',promo:'100 دان شەكتى',price:'9.9',originalPrice:'199',tags:'Online oqıw,forever',category:5}
   ],
   serviceTopTitle:'باستاۋ قىزمەت وتەۋ تۇرلەرى',
@@ -91,7 +91,7 @@
     {icon:'💡',name:'پاتەنت جوبالاۋ',desc:'ونىم جوسپارئن جانە جوباسىزبا جەتىلدىرۋ',category:'patent'},
     {icon:'📱',name:'مينى پروگرامما جاساۋ',desc:'WeChat شاعىن باعدارلاما اشۋ، توردۇكەن ',category:'other'},
     {icon:'🌐',name:'سايت جاساۋ',desc:'كۆپ تىلدە توراپ  سايت',category:'other'},
-    {icon:'🎓',name:'قوراپ جوبالاۋ',desc:'ونىم قاپتاماسىنىڭ ديزاينى جانە برەندى كورنەكى جاڭارتۋ',category:'other'},
+    {icon:'🎓',name:'قوراپ جوبالاۋ',desc:'ونىم قاپتاماسىنىڭ جوبالاۋى جانە برەندى كورنەكى جاڭارتۋ',category:'other'},
     {icon:'🏢',name:'كومپانيا تىزىمدەۋ',desc:'جۇڭگو، قازاقستان، حوڭكوڭ، امەريكا جانەدۇنيە جۇزىندەگى',category:'company'}
   ]
 }

@@ -38,62 +38,168 @@ async function heartbeat() {
   }
 }
 
-// 客户线索服务
-const LeadService = {
-  // 创建线索
+// 本地存储管理服务（Supabase 不可用时的降级方案）
+const LocalLeadService = {
+  getAll() {
+    return wx.getStorageSync('leads') || []
+  },
+  saveAll(leads) {
+    wx.setStorageSync('leads', leads)
+  },
+
   async create(lead) {
-    return request('/customers', 'POST', {
+    const leads = this.getAll()
+    leads.unshift({
+      id: Date.now(),
       ...lead,
       status: 'pending',
       created_at: new Date().toISOString()
     })
+    this.saveAll(leads)
+    return leads[0]
   },
 
-  // 获取线索列表
   async list(status = null, page = 1, pageSize = 20) {
-    let url = `/customers?select=*&order=created_at.desc&limit=${pageSize}&offset=${(page - 1) * pageSize}`
+    let leads = this.getAll()
     if (status && status !== 'all') {
-      url += `&status=eq.${status}`
+      leads = leads.filter(l => l.status === status)
     }
-    return request(url)
+    const start = (page - 1) * pageSize
+    return leads.slice(start, start + pageSize)
   },
 
-  // 获取线索总数
   async count(status = null) {
-    let url = '/customers?select=count'
+    let leads = this.getAll()
     if (status) {
-      url += `&status=eq.${status}`
+      leads = leads.filter(l => l.status === status)
     }
-    const result = await request(url)
-    return result[0]?.count || 0
+    return leads.length
   },
 
-  // 更新线索状态
+  async getStats() {
+    const all = this.getAll()
+    return {
+      total: all.length,
+      pending: all.filter(l => l.status === 'pending').length,
+      contacted: all.filter(l => l.status === 'contacted').length,
+      closed: all.filter(l => l.status === 'closed').length
+    }
+  },
+
   async updateStatus(id, status) {
-    return request(`/customers?id=eq.${id}`, 'PATCH', {
-      status,
-      updated_at: new Date().toISOString()
+    const leads = this.getAll()
+    const idx = leads.findIndex(l => l.id === id)
+    if (idx > -1) {
+      leads[idx].status = status
+      leads[idx].updated_at = new Date().toISOString()
+      this.saveAll(leads)
+    }
+  },
+
+  async delete(id) {
+    const leads = this.getAll().filter(l => l.id !== id)
+    this.saveAll(leads)
+  }
+}
+
+// 管理员服务（基于本地存储）
+const AdminService = {
+  login(username, password) {
+    return new Promise((resolve, reject) => {
+      const users = wx.getStorageSync('admin_users') || []
+      const user = users.find(u => u.username === username && u.password === password)
+      if (user) {
+        wx.setStorageSync('admin_token', 'token_' + Date.now())
+        wx.setStorageSync('admin_user', user)
+        resolve(user)
+      } else {
+        reject(new Error('账号或密码错误'))
+      }
     })
   },
 
-  // 删除线索
-  async delete(id) {
-    return request(`/customers?id=eq.${id}`, 'DELETE')
+  checkLogin() {
+    return !!wx.getStorageSync('admin_token')
   },
 
-  // 获取统计
+  logout() {
+    wx.removeStorageSync('admin_token')
+    wx.removeStorageSync('admin_user')
+  }
+}
+
+// 带自动降级的线索服务（优先 Supabase，失败时用本地存储）
+const LeadService = {
+  async _withFallback(supabaseFn, localFn) {
+    try {
+      return await supabaseFn()
+    } catch {
+      console.warn('[LeadService] Supabase 不可用，使用本地存储')
+      return localFn()
+    }
+  },
+
+  async create(lead) {
+    return this._withFallback(
+      () => request('/customers', 'POST', { ...lead, status: 'pending', created_at: new Date().toISOString() }),
+      () => LocalLeadService.create(lead)
+    )
+  },
+
+  async list(status = null, page = 1, pageSize = 20) {
+    return this._withFallback(
+      () => {
+        let url = `/customers?select=*&order=created_at.desc&limit=${pageSize}&offset=${(page - 1) * pageSize}`
+        if (status && status !== 'all') url += `&status=eq.${status}`
+        return request(url)
+      },
+      () => LocalLeadService.list(status, page, pageSize)
+    )
+  },
+
+  async count(status = null) {
+    return this._withFallback(
+      () => {
+        let url = '/customers?select=count'
+        if (status) url += `&status=eq.${status}`
+        return request(url).then(r => r[0]?.count || 0)
+      },
+      () => LocalLeadService.count(status)
+    )
+  },
+
+  async updateStatus(id, status) {
+    return this._withFallback(
+      () => request(`/customers?id=eq.${id}`, 'PATCH', { status, updated_at: new Date().toISOString() }),
+      () => LocalLeadService.updateStatus(id, status)
+    )
+  },
+
+  async delete(id) {
+    return this._withFallback(
+      () => request(`/customers?id=eq.${id}`, 'DELETE'),
+      () => LocalLeadService.delete(id)
+    )
+  },
+
   async getStats() {
-    const [total, pending, contacted, closed] = await Promise.all([
-      this.count(),
-      this.count('pending'),
-      this.count('contacted'),
-      this.count('closed')
-    ])
-    return { total, pending, contacted, closed }
+    return this._withFallback(
+      async () => {
+        const [total, pending, contacted, closed] = await Promise.all([
+          this.count(),
+          this.count('pending'),
+          this.count('contacted'),
+          this.count('closed')
+        ])
+        return { total, pending, contacted, closed }
+      },
+      () => LocalLeadService.getStats()
+    )
   }
 }
 
 module.exports = {
   LeadService,
+  AdminService,
   heartbeat
 }

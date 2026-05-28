@@ -32,16 +32,20 @@
   <!-- 头部 -->
   <view class="admin-header">
     <view class="header-title">客户线索管理</view>
-    <view class="header-actions">
-      <view class="header-btn secondary" bindtap="refreshData">
-        <text>⟳</text>
-        <text>刷新</text>
+      <view class="header-actions">
+        <view class="header-btn primary" bindtap="showCreate">
+          <text>+</text>
+          <text>新增</text>
+        </view>
+        <view class="header-btn secondary" bindtap="refreshData">
+          <text>⟳</text>
+          <text>刷新</text>
+        </view>
+        <view class="header-btn secondary" bindtap="handleLogout">
+          <text>→</text>
+          <text>退出</text>
+        </view>
       </view>
-      <view class="header-btn secondary" bindtap="handleLogout">
-        <text>→</text>
-        <text>退出</text>
-      </view>
-    </view>
   </view>
 
   <!-- 统计卡片 -->
@@ -120,5 +124,21 @@
     <view class="page-btn" bindtap="prevPage" wx:if="{{currentPage > 1}}">上一页</view>
     <view class="page-info">第 {{currentPage}} / {{totalPages}} 页</view>
     <view class="page-btn" bindtap="nextPage" wx:if="{{currentPage < totalPages}}">下一页</view>
+  </view>
+
+  <!-- 新增线索弹窗 -->
+  <view class="modal-overlay" wx:if="{{showCreateModal}}" bindtap="hideCreate">
+    <view class="modal-box" catchtap="noop">
+      <view class="modal-title">新增线索</view>
+      <input class="modal-input" placeholder="姓名 *" value="{{createForm.name}}" bindinput="onCreateField" data-field="name" />
+      <input class="modal-input" placeholder="电话 *" type="number" value="{{createForm.phone}}" bindinput="onCreateField" data-field="phone" />
+      <input class="modal-input" placeholder="微信" value="{{createForm.wechat}}" bindinput="onCreateField" data-field="wechat" />
+      <input class="modal-input" placeholder="服务类型" value="{{createForm.type}}" bindinput="onCreateField" data-field="type" />
+      <input class="modal-input" placeholder="备注" value="{{createForm.content}}" bindinput="onCreateField" data-field="content" />
+      <view class="modal-actions">
+        <view class="modal-btn cancel" bindtap="hideCreate">取消</view>
+        <view class="modal-btn confirm" bindtap="submitCreate">{{loading ? '提交中...' : '确认添加'}}</view>
+      </view>
+    </view>
   </view>
 </view>
