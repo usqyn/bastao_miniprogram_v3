@@ -1,5 +1,6 @@
 const { applyLang, changeLang } = require('../../i18n.js')
 const share = require('../../utils/share.js')
+const { checkTrademark } = require('../../utils/trademark-rules.js')
 Page({
   ...share,
   data:{ keyword:'', countryIndex:0, catIndex:0, country:'', category:'', lang:'zh', t:{}, rtl:false, loading:false },
@@ -22,11 +23,9 @@ Page({
     this.setData({loading:true})
     try {
       setTimeout(()=>{
-        const pool=['available','registered','unknown'];
-        const keywordLen = (this.data.keyword || '').length
-        const status=pool[keywordLen % 3];
+        var r=checkTrademark(this.data.keyword,this.data.country,this.data.category)
         this.setData({loading:false})
-        wx.navigateTo({url:`/pages/result/result?keyword=${encodeURIComponent(this.data.keyword)}&country=${encodeURIComponent(this.data.country)}&category=${encodeURIComponent(this.data.category)}&status=${status}`})
+        wx.navigateTo({url:'/pages/result/result?keyword='+encodeURIComponent(this.data.keyword)+'&country='+encodeURIComponent(this.data.country)+'&category='+encodeURIComponent(this.data.category)+'&status='+r.status+'&risk='+encodeURIComponent(r.risk)+'&advice='+encodeURIComponent(r.advice)})
       },800)
     } catch(e) {
       this.setData({loading:false})

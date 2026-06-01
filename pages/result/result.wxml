@@ -20,4 +20,25 @@
     <view class="muted">{{t.courseSub}}</view>
     <view class="small-btn">{{t.learnNow}}</view>
   </view>
+  <view class="disclaimer-link" bindtap="showDisclaimer">{{t.disclaimerViewLink}}</view>
+</view>
+
+<view class="modal-overlay {{showDisclaimer?'':'hidden'}}">
+  <view class="disclaimer-modal {{rtl?'rtl':''}}">
+    <view class="disclaimer-title">{{t.disclaimerTitle}}</view>
+    <view class="disclaimer-body">
+      <view wx:for="{{t.disclaimerIntro}}" wx:for-item="para" wx:key="*this" class="para">{{para}}</view>
+      <view wx:for="{{t.disclaimerSections}}" wx:for-item="sec" wx:key="title">
+        <view class="sec-title">{{sec.title}}</view>
+        <view wx:for="{{sec.items}}" wx:for-item="para" wx:key="*this" class="para">{{para}}</view>
+      </view>
+      <view class="checkbox-row" bindtap="toggleAgreed">
+        <view class="checkbox {{agreed?'checked':''}}">
+          <view wx:if="{{agreed}}" class="checkmark">✓</view>
+        </view>
+        <view class="checkbox-label">{{t.disclaimerCheckbox}}</view>
+      </view>
+    </view>
+    <button class="btn {{agreed?'btn-gold':'btn-disabled'}}" disabled="{{!agreed}}" bindtap="acceptDisclaimer">{{t.disclaimerConfirm}}</button>
+  </view>
 </view>
