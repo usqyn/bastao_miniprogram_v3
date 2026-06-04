@@ -1,0 +1,12 @@
+{
+  "triggers": [
+    {
+      "name": "payNotify",
+      "type": "http",
+      "config": {
+        "methods": ["POST"],
+        "path": "/wxpay_notify"
+      }
+    }
+  ]
+}

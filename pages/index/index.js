@@ -12,8 +12,8 @@ Page({
     filteredServices: [],
     // 轮播图数据
     banners: [
-      { id: 1, image: '/images/zh/banner1.png', title: '2060+', subtitle: '全国服务门店为你服务' },
-      { id: 2, image: '/images/zh/banner2.png', title: '专业团队', subtitle: '一对一专属顾问服务' },
+      { id: 1, image: '/images/zh/banner1.jpg', title: '2060+', subtitle: '全国服务门店为你服务' },
+      { id: 2, image: '/images/zh/banner2.jpg', title: '专业团队', subtitle: '一对一专属顾问服务' },
       { id: 3, image: '/images/zh/banner3.png', title: '品质保障', subtitle: '全程跟踪直至完成' }
     ]
   },
@@ -37,8 +37,8 @@ Page({
     const imagePath = `/images/${lang}/`
     this.setData({
       banners: [
-        { id: 1, image: imagePath + 'banner1.png' },
-        { id: 2, image: imagePath + 'banner2.png' },
+        { id: 1, image: imagePath + 'banner1.jpg' },
+        { id: 2, image: imagePath + 'banner2.jpg' },
         { id: 3, image: imagePath + 'banner3.png' }
       ]
     })

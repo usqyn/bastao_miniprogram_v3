@@ -51,7 +51,7 @@ Page({
     this.data.orderItems.forEach(item => {
       goodsTotal += parseFloat(item.price) * item.quantity
     })
-    const freight = goodsTotal >= 99 ? 0 : 10
+    const freight = goodsTotal >= 0 ? 0 : 10
     const orderTotal = goodsTotal + freight - this.data.discount
     this.setData({ goodsTotal: goodsTotal.toFixed(2), freight, orderTotal: orderTotal.toFixed(2) })
   },
@@ -83,11 +83,6 @@ Page({
   async submitOrder() {
     const { orderItems, address, remark, orderTotal } = this.data
 
-    if (!address) {
-      wx.showToast({ title: '请选择收货地址', icon: 'none' })
-      return
-    }
-
     if (orderItems.length === 0) {
       wx.showToast({ title: '订单商品为空', icon: 'none' })
       return
@@ -101,7 +96,7 @@ Page({
       const order = {
         orderNo,
         items: orderItems,
-        address,
+        address: address || {},
         remark,
         totalAmount: orderTotal,
         status: 'pending',
@@ -110,19 +105,47 @@ Page({
 
       await OrderService.create(order)
 
+      const savedOrders = wx.getStorageSync('orders') || []
+      savedOrders.unshift(order)
+      wx.setStorageSync('orders', savedOrders)
+
       const cart = wx.getStorageSync('cart') || []
       const newItemIds = orderItems.map(item => item.id)
       wx.setStorageSync('cart', cart.filter(item => !newItemIds.includes(item.id)))
       wx.removeStorageSync('orderItems')
 
-      setTimeout(() => {
-        wx.hideLoading()
-        wx.redirectTo({ url: `/pages/pay-result/pay-result?orderNo=${orderNo}&amount=${orderTotal}&status=success` })
-      }, 1000)
+      const res = await wx.cloud.callFunction({
+        name: 'wxpay_unifiedorder',
+        data: { orderNo, totalAmount: orderTotal }
+      })
+
+      wx.hideLoading()
+
+      if (res.result.code === 0) {
+        const pay = res.result.data
+        await wx.requestPayment({
+          timeStamp: pay.timeStamp,
+          nonceStr: pay.nonceStr,
+          package: pay.package,
+          signType: pay.signType,
+          paySign: pay.paySign
+        })
+        wx.redirectTo({
+          url: `/pages/pay-result/pay-result?orderNo=${orderNo}&amount=${orderTotal}&status=success`
+        })
+      } else {
+        throw new Error(res.result.message || '获取支付参数失败')
+      }
     } catch (e) {
       wx.hideLoading()
-      console.error('提交订单失败:', e)
-      wx.showToast({ title: '提交失败', icon: 'none' })
+      if (e.errMsg && e.errMsg.includes('requestPayment:fail')) {
+        wx.redirectTo({
+          url: `/pages/pay-result/pay-result?orderNo=${orderNo}&amount=${orderTotal}&status=fail`
+        })
+      } else {
+        console.error('提交订单失败:', e)
+        wx.showToast({ title: '提交失败', icon: 'none' })
+      }
     }
   }
 })

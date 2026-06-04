@@ -17,7 +17,7 @@ Page({
       spec: '',
       badge: '',
       promo: '',
-      image: '/images/zh/banner1.png',
+      image: '/images/zh/banner1.jpg',
       tags: []
     }
   },
@@ -70,7 +70,7 @@ Page({
       form: {
         name: '', slogan: '', price: '', originalPrice: '',
         category: 0, spec: '', badge: '', promo: '',
-        image: '/images/zh/banner1.png', tags: []
+        image: '/images/zh/banner1.jpg', tags: []
       }
     })
   },

@@ -80,19 +80,9 @@ Page({
         content: this.data.content
       })
     } catch (err) {
-      console.warn('Supabase 不可用，保存到本地:', err)
-      const leads = wx.getStorageSync('leads') || []
-      leads.unshift({
-        id: Date.now(),
-        name: this.data.name,
-        phone: this.data.phone,
-        wechat: this.data.wechat,
-        type: this.data.type,
-        content: this.data.content,
-        status: 'pending',
-        created_at: new Date().toISOString()
-      })
-      wx.setStorageSync('leads', leads)
+      console.warn('提交失败:', err)
+      wx.showToast({ title: '提交失败，请重试', icon: 'none' })
+      return
     }
 
     this.setData({ loading: false })
